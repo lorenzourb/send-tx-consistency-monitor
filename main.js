@@ -11,8 +11,8 @@ const data = new SharedArray('Rpcs', function () {
 });
 
 export const options = {
-  vus: 50,
-  duration: '1h',
+  vus: 100,
+  duration: '2h',
 };
 
 export let infuraErrorRate = new Rate("InfuraErrors");
