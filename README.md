@@ -8,7 +8,7 @@ influxdb:1.8`
 * Install grafana `brew install grafana && brew services start grafana`
 * Go to the grafana UI `http://localhost:3000` and after the login configure Influx db as a data source then import the following dashboards by ID `https://grafana.com/grafana/dashboards/13719`
 * Review the test RPC fixture mix 
-* Into `main.js` review the test scenario and group configuration
+* Into `infura_vs_alchmey.js` review the test scenario and group configuration
 * Run a test with `INFURA_KEY=put_your_infura_key_here ALCHEMY_KEY=put_your_alchemy_key_here k6 run main.js --out influxdb=http://localhost:8086/myk6db` making sure to point the correct account keys
 
 # Send metrics to Datadoghq

@@ -1,15 +1,16 @@
 {
-  "name": "k6versus",
+  "name": "qa-k6",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "node main.js"
+    "polygon_prod_like": "k6 run polygon_prod_like.js",
+    "comp_comparison": "k6 run scenarios/infura_vs_alchmey.js"
   },
   "author": "",
   "license": "ISC",
   "type": "module",
   "dependencies": {
-    "k6": "^0.0.0"
+    "k6": "0.0.0"
   }
 }
