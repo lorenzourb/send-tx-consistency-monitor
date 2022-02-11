@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "polygon_prod_like": "k6 run polygon_prod_like.js",
+    "aurora_prod_like": "k6 run aurora_prod_like.js",
     "comp_comparison": "k6 run scenarios/infura_vs_alchmey.js"
   },
   "author": "",
