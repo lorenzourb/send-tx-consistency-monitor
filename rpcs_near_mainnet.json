@@ -1,0 +1,12 @@
+[
+  {"jsonrpc": "2.0", "id": 0,  "method": "query", "params": {"request_type": "call_function", "account_id": "binancenode1.poolv1.near", "finality": "final", "method_name": "get_number_of_accounts", "args_base64": ""}},
+  {"jsonrpc": "2.0", "id": 0, "method": "chunk", "params": {"chunk_id": "AroVqMvh7VmUuSEv3U84LGnVc4cyGnArZtKMKkbDZyWR"}},  
+  {"jsonrpc": "2.0", "id": 0, "method": "gas_price", "params": [59653513]},
+  {"jsonrpc": "2.0", "id": 0, "method": "block", "params": {"block_id": 59653513}},
+  {"jsonrpc": "2.0", "id": 0, "method": "tx",  "params": ["81HHEW7JcLCMHcF1tMMNnnpMeypX2Ep7zKw6Vo5AEDZP", "app.nearcrowd.near"]},
+  {"jsonrpc": "2.0", "id": "dontcare", "method": "status","params": []},
+  {"jsonrpc": "2.0", "id": "dontcare", "method": "network_info","params": []},
+  {"jsonrpc": "2.0", "id": "dontcare", "method": "validators","params": [null]},
+  {"jsonrpc": "2.0", "id": 0, "method": "query",  "params": {"request_type": "view_account", "account_id": "binancenode1.poolv1.near", "finality": "final"}},
+  {"jsonrpc": "2.0", "id": 0,  "method": "query", "params": {"request_type": "view_code", "finality": "final", "account_id": "binancenode1.poolv1.near" }}
+]
