@@ -9,7 +9,8 @@
     "near_prod_like_wr": "k6 run near_prod_like_write.js",
     "near_prod_like_read": "k6 run near_prod_like_read_only.js",
     "near_prod_like": "k6 run near_prod_like_write.js & k6 run near_prod_like_read_only.js",
-    "comp_comparison": "k6 run scenarios/infura_vs_alchmey.js"
+    "comp_comparison": "k6 run scenarios/infura_vs_alchmey.js",
+    "erigon_comparison": "INFURA_KEY='' k6 run scenarios/eth1_infura_vs_erigon.js"
   },
   "author": "",
   "license": "ISC",

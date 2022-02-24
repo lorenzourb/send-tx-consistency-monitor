@@ -54,7 +54,6 @@ export default function () {
     if(!success) { 
       console.log(res.body);
       infuraErrorRate.add(1);
-    }
-    
+    } 
   });
 }
