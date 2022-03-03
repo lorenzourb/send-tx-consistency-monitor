@@ -11,40 +11,26 @@ const data = new SharedArray('Rpcs', function () {
 });
 
 export const options = {
-  vus: 50,
-  duration: '2m',
+  stages: [
+    { duration: '1m', target: 400 }, // below normal load
+    { duration: '2m', target: 400 },
+    { duration: '1m', target: 800 }, // normal load
+    // { duration: '2m', target: 800 },
+    { duration: '1m', target: 1600 }, // around the breaking point
+    { duration: '2m', target: 1600 },
+    { duration: '1m', target: 800 }, // beyond the breaking point
+    { duration: '2m', target: 800 },
+    { duration: '1m', target: 0 }, // scale down. Recovery stage.
+  ]
 };
 
 export let infuraErrorRate = new Rate("InfuraErrors");
 export let erigonErrorRate = new Rate("ErigonErrors");
 
 export default function () {
-  group('Infura - Eth1 - Mainnet', function () {
-    const url = `https://mainnet.infura.io/v3/${__ENV.INFURA_KEY}`;
-    const payload = JSON.stringify(data[Math.floor(Math.random() * data.length)]);
-    const params = {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      timeout: '120s'
-    };
-    const res = http.post(url, payload, params);
-    let success = check(res, {
-      'is status 200': (r) => r.status === 200,
-      'verify rpc resp': (r) =>
-        r.body.includes('"jsonrpc":"2.0"'),
-      'verify rpc resp - no err': (r) =>
-        !r.body.includes('error')
-    });
-    if(!success) { 
-      console.log(url);
-      console.log(payload);
-      infuraErrorRate.add(1);
-    }
-  });
-
-  // group('Erigon - Eth1 - Mainnet', function () {
-  //   const url = `http://54.82.108.149:8545`;
+  // group('Infura - Eth1 - Mainnet', function () {
+  //   const url = `http://ec2-52-23-201-192.compute-1.amazonaws.com:8545`;
+  //   // const url = `https://mainnet.infura.io/v3/${__ENV.INFURA_KEY}`;
   //   const payload = JSON.stringify(data[Math.floor(Math.random() * data.length)]);
   //   const params = {
   //     headers: {
@@ -63,8 +49,34 @@ export default function () {
   //   if(!success) { 
   //     console.log(url);
   //     console.log(payload);
-  //     erigonErrorRate.add(1);
+  //     infuraErrorRate.add(1);
   //   }
   // });
 
+  group('Erigon - Eth1 - Mainnet', function () {
+    const url = `http://internal-k8s-miketest-erigonrp-8bef4c574c-1464932306.us-east-1.elb.amazonaws.com`
+    // const url = `http://34.229.187.1:8545`;
+    // const url = `http://54.82.108.149:8545`;
+    const payload = JSON.stringify(data[Math.floor(Math.random() * data.length)])
+    const params = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      timeout: '120s'
+    }
+    const res = http.post(url, payload, params)
+    // console.log(JSON.stringify(res))
+    let success = check(res, {
+      'is status 200': (r) => r.status === 200,
+      'verify rpc resp': (r) =>
+      r.body && r.body.includes('"jsonrpc":"2.0"'),
+      'verify rpc resp - no err': (r) =>
+      r.body && !r.body.includes('error')
+    })
+    if(!success) { 
+      console.log(url);
+      console.log(payload);
+      erigonErrorRate.add(1);
+    }
+  })
 }

@@ -1,10 +1,10 @@
 import http from 'k6/http';
 import { SharedArray } from 'k6/data';
-import { group, check, sleep } from 'k6';
+import { group, check } from 'k6';
 import { Rate } from "k6/metrics";
 
 const data = new SharedArray('Rpcs', function () {
-  return JSON.parse(open('./rpcs_aurora.json'));
+  return JSON.parse(open('./rpcs_aurora_testnet.json'));
 });
 
 export const options = {
@@ -13,7 +13,7 @@ export const options = {
       executor: 'constant-arrival-rate',
       rate: 200,
       duration: '5m',
-      preAllocatedVUs: 50,
+      preAllocatedVUs: 200,
       maxVUs: 200,
     },
   }
@@ -35,7 +35,7 @@ export let infuraErrorRate = new Rate("InfuraErrors");
 
 export default function () {
   group('Infura - Aurora - Production like traffic', function () {
-    const url = `http://aurora-testnet.infura.cloud`;
+    const url = `https://aurora-testnet.infura.io/v3/`;
     const payload = JSON.stringify(data[Math.floor(Math.random() * data.length)]);
     const params = {
       headers: {
@@ -52,7 +52,7 @@ export default function () {
         !r.body.includes('error')
     });
     if(!success) { 
-      console.log(res.body);
+      console.log(payload);
       infuraErrorRate.add(1);
     } 
   });
