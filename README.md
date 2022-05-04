@@ -15,3 +15,7 @@ influxdb:1.8`
 * Run the agent with the docker command from https://k6.io/docs/results-visualization/datadog/ (make sure to specify the api_key)
 * Run the test script with `K6_STATSD_ENABLE_TAGS=true INFURA_KEY=put_your_infura_key_here ALCHEMY_KEY=put_your_alchemy_key_here k6 run --out statsd main.js`
 
+
+K6_INFLUXDB_PUSH_INTERVAL=2s
+K6_INFLUXDB_PAYLOAD_SIZE= K6_INFLUXDB_PUSH_INTERVAL=3s INFURA_KEY='' k6 run scenarios/eth1_infura_vs_erigon.js --out influxdb=http://localhost:8086
+

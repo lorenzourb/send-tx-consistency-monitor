@@ -9,13 +9,14 @@
     "near_prod_like_wr": "k6 run near_prod_like_write.js",
     "near_prod_like_read": "k6 run near_prod_like_read_only.js",
     "near_prod_like": "k6 run near_prod_like_write.js & k6 run near_prod_like_read_only.js",
+    "soak": "k6 run scenarios/soak_test_qa_124.js",
     "comp_comparison": "k6 run scenarios/infura_vs_alchmey.js",
-    "erigon_comparison": "INFURA_KEY='' k6 run scenarios/eth1_infura_vs_erigon.js --out influxdb=http://localhost:8086"
+    "erigon_comparison": "K6_INFLUXDB_PAYLOAD_SIZE=5000000 K6_INFLUXDB_PUSH_INTERVAL=2s k6 run scenarios/eth1_infura_vs_erigon.js --out influxdb=http://localhost:8086"
   },
   "author": "",
   "license": "ISC",
   "type": "module",
   "dependencies": {
-    "k6": "0.0.0"
+    "k6": "^0.0.0"
   }
 }

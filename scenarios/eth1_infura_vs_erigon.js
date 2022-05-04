@@ -7,21 +7,28 @@ import { Rate } from "k6/metrics";
 // parses the json) will be executed per each VU which also means that there will be a complete copy
 // per each VU
 const data = new SharedArray('Rpcs', function () {
-  return JSON.parse(open('../rpcs_eth1.json'));
+  return JSON.parse(open('../rpc_jsons/rpcs_eth1.json'));
 });
 
 export const options = {
-  stages: [
-    { duration: '1m', target: 400 }, // below normal load
-    { duration: '2m', target: 400 },
-    { duration: '1m', target: 800 }, // normal load
-    // { duration: '2m', target: 800 },
-    { duration: '1m', target: 1600 }, // around the breaking point
-    { duration: '2m', target: 1600 },
-    { duration: '1m', target: 800 }, // beyond the breaking point
-    { duration: '2m', target: 800 },
-    { duration: '1m', target: 0 }, // scale down. Recovery stage.
-  ]
+  scenarios: {
+    constant_request_rate: {
+      executor: 'constant-arrival-rate',
+      rate: 1000,
+      timeUnit: '1s', // 1000 iterations per second, i.e. 1000 RPS
+      duration: '2m',
+      preAllocatedVUs: 500, // how large the initial pool of VUs would be
+      maxVUs: 5000, // if the preAllocatedVUs are not enough, we can initialize more
+    },
+  },
+  // stages: [
+  //   { duration: '1m', target: 800 }, // normal load
+  //   { duration: '1m', target: 800 },
+  //   { duration: '1m', target: 1600 }, // around the breaking point
+  //   { duration: '2m', target: 1600 },
+  //   // { duration: '1m', target: 800 }, // beyond the breaking point
+  //   { duration: '1m', target: 0 }, // scale down. Recovery stage.
+  // ]
 };
 
 export let infuraErrorRate = new Rate("InfuraErrors");
@@ -54,8 +61,8 @@ export default function () {
   // });
 
   group('Erigon - Eth1 - Mainnet', function () {
-    const url = `http://internal-k8s-miketest-erigonrp-8bef4c574c-1464932306.us-east-1.elb.amazonaws.com`
-    // const url = `http://34.229.187.1:8545`;
+    // const url = `http://internal-k8s-miketest-erigonrp-8bef4c574c-1464932306.us-east-1.elb.amazonaws.com`
+    const url = `http://34.229.187.1:8545`;
     // const url = `http://54.82.108.149:8545`;
     const payload = JSON.stringify(data[Math.floor(Math.random() * data.length)])
     const params = {
