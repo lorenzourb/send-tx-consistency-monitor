@@ -4,17 +4,17 @@ import { group, check } from 'k6';
 import { Rate } from "k6/metrics";
 
 const data = new SharedArray('Rpcs', function () {
-  return JSON.parse(open('./rpcs_aurora_testnet.json'));
+  return JSON.parse(open('../rpc_jsons/rpcs_aurora_mainnet.json'));
 });
 
 export const options = {
   scenarios: {
     contacts: {
       executor: 'constant-arrival-rate',
-      rate: 200,
+      rate: 500,
       duration: '5m',
-      preAllocatedVUs: 200,
-      maxVUs: 200,
+      preAllocatedVUs: 700,
+      maxVUs: 700,
     },
   }
 };
@@ -35,7 +35,7 @@ export let infuraErrorRate = new Rate("InfuraErrors");
 
 export default function () {
   group('Infura - Aurora - Production like traffic', function () {
-    const url = `https://aurora-testnet.infura.io/v3/`;
+    const url = `https://aurora-mainnet.dev.infura.org/v3/${__ENV.INFURA_KEY}`;
     const payload = JSON.stringify(data[Math.floor(Math.random() * data.length)]);
     const params = {
       headers: {

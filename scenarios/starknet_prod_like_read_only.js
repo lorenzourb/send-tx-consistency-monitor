@@ -23,7 +23,7 @@ export let infuraErrorRate = new Rate("InfuraErrors");
 
 export default function () {
   group('Infura - Starknet - Production like traffic (read only)', function () {
-    const url = `https://starknet-mainnet.dev.infura.org/v3/27b3b233553a4b95bf08db32b26ae581`;
+    const url = `https://starknet-mainnet.dev.infura.org/v3/${__ENV.INFURA_KEY}`;
     const payload = JSON.stringify(data[Math.floor(Math.random() * data.length)]);
     const params = {
       headers: {
