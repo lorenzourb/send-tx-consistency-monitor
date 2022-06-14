@@ -1,41 +1,29 @@
 import http from 'k6/http';
 import { SharedArray } from 'k6/data';
-import { group, check } from 'k6';
+import { group, check, sleep } from 'k6';
 import { Rate } from "k6/metrics";
 
 const data = new SharedArray('Rpcs', function () {
-  return JSON.parse(open('../rpc_jsons/rpcs_aurora_mainnet.json'));
+  return JSON.parse(open('../rpc_jsons/rpcs_starknet_mainnet.json'));
 });
 
 export const options = {
   scenarios: {
     contacts: {
       executor: 'constant-arrival-rate',
-      rate: 500,
-      duration: '5m',
-      preAllocatedVUs: 700,
-      maxVUs: 700,
+      rate: 200,
+      duration: '3m',
+      preAllocatedVUs: 200,
+      maxVUs: 300,
     },
   }
 };
 
-// export const options = {
-//   scenarios: {
-//     contacts: {
-//       executor: 'constant-arrival-rate',
-//       rate: 300,
-//       duration: '5m',
-//       preAllocatedVUs: 150,
-//       maxVUs: 300,
-//     },
-//   }
-// };
-
 export let infuraErrorRate = new Rate("InfuraErrors");
 
 export default function () {
-  group('Infura - Aurora - Production like traffic', function () {
-    const url = `https://aurora-mainnet.dev.infura.org/v3/${__ENV.INFURA_KEY}`;
+  group('Infura - Starknet - Production like traffic (read only)', function () {
+    const url = `https://starknet-mainnet.dev.infura.org/v3/${__ENV.INFURA_KEY}`;
     const payload = JSON.stringify(data[Math.floor(Math.random() * data.length)]);
     const params = {
       headers: {
@@ -52,8 +40,8 @@ export default function () {
         !r.body.includes('error')
     });
     if(!success) { 
-      console.log(payload);
+      console.log(JSON.stringify(res));
       infuraErrorRate.add(1);
-    } 
+    }    
   });
 }

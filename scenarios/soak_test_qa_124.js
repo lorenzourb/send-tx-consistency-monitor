@@ -4,8 +4,8 @@ import { group, check } from 'k6';
 import { Counter } from 'k6/metrics';
 import { Rate } from "k6/metrics";
 
-const url = `https://polygon-mainnet.infura.io/v3/06c059d611c641ffac588230c08f2e6c`;
-const url2 = `https://mainnet.infura.io/v3/06c059d611c641ffac588230c08f2e6c`;
+const url = `https://polygon-mainnet.infura.io/v3/${__ENV.INFURA_KEY}`;
+const url2 = `https://mainnet.infura.io/v3/${__ENV.INFURA_KEY}`;
 
 // const data = new SharedArray('Rpcs', function (){
 //   return JSON.parse(open('./ethgetlogs.json'));

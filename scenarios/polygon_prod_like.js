@@ -4,7 +4,7 @@ import { group, check, sleep } from 'k6';
 import { Rate } from "k6/metrics";
 
 const data = new SharedArray('Rpcs', function () {
-  return JSON.parse(open('./rpcs.json'));
+  return JSON.parse(open('../rpc_jsons/rpcs.json'));
 });
 
 export const options = {
@@ -18,12 +18,11 @@ export const options = {
     },
   }
 };
-
 export let infuraErrorRate = new Rate("InfuraErrors");
 
 export default function () {
   group('Infura - polygon - Production like traffic', function () {
-    const url = `https://polygon-mumbai.staging.infura.org/v3/${__ENV.INFURA_KEY}`;
+    const url = `https://polygon-mainnet.dev.infura.org/v3/${__ENV.INFURA_KEY}`;
     const payload = JSON.stringify(data[Math.floor(Math.random() * data.length)]);
     const params = {
       headers: {
@@ -32,6 +31,8 @@ export default function () {
       timeout: '120s'
     };
     const res = http.post(url, payload, params);
+    // console.log(res.body)
+    // console.log(res.status)
     let success = check(res, {
       'is status 200': (r) => r.status === 200,
       'verify rpc resp': (r) =>
@@ -40,7 +41,7 @@ export default function () {
         !r.body.includes('error')
     });
     if(!success) { 
-      console.log(res.body);
+      // console.log(res.body);
       infuraErrorRate.add(1);
     }
     

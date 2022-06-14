@@ -1,0 +1,42 @@
+[
+  {"jsonrpc": "2.0", "id": 0, "method": "starknet_getBlockByHash", "params": ["0x1fc32aa4362bcc0add8367de2d5ebbeeb2b5404f87b4d6b667ee50b0cb93e7d"]},
+  {"jsonrpc": "2.0", "id": 0, "method": "starknet_getBlockByNumber", "params": [2269]},
+  {"jsonrpc": "2.0", "id": 0, "method": "starknet_getBlockByNumber", "params": [2269]},
+  {"jsonrpc": "2.0", "id": 0, "method": "starknet_getBlockByHash", "params": ["0x1fc32aa4362bcc0add8367de2d5ebbeeb2b5404f87b4d6b667ee50b0cb93e7d"]},
+  {"jsonrpc": "2.0", "id": 0, "method": "starknet_getBlockByNumber", "params": [2269]},
+  {"jsonrpc": "2.0", "id": 0, "method": "starknet_getBlockByHash", "params": ["0x1fc32aa4362bcc0add8367de2d5ebbeeb2b5404f87b4d6b667ee50b0cb93e7d"]},
+  {"jsonrpc": "2.0", "id": 0, "method": "starknet_getBlockByNumber", "params": [2269]},
+  {"jsonrpc": "2.0", "id": 0, "method": "starknet_getBlockByHash", "params": ["0x1fc32aa4362bcc0add8367de2d5ebbeeb2b5404f87b4d6b667ee50b0cb93e7d"]},
+  {"jsonrpc": "2.0", "id": 0, "method": "starknet_getTransactionReceipt", "params": ["0x6dcbed604d510576a505876c6ea0245a792c2ac9096a50da8347815aa58aedb"]},
+  {"jsonrpc": "2.0", "id": 0, "method": "starknet_getTransactionByHash", "params": ["0x75840c6142db835079caecf82b413830530ad9a6a4600854ecf2e7106220714"]},
+  {"jsonrpc": "2.0", "id": 0, "method": "starknet_getTransactionReceipt", "params": ["0x6dcbed604d510576a505876c6ea0245a792c2ac9096a50da8347815aa58aedb"]},
+  {"jsonrpc": "2.0", "id": 0, "method": "starknet_getTransactionByHash", "params": ["0x75840c6142db835079caecf82b413830530ad9a6a4600854ecf2e7106220714"]},
+  {"jsonrpc": "2.0", "id": 0, "method": "starknet_getEvents", "params": [{"fromBlock": 2271, "toBlock": 2272, "page_size" :1, "page_number": 1}]},
+  {"jsonrpc": "2.0", "id": 0, "method": "starknet_getBlockTransactionCountByHash", "params": ["0x1fc32aa4362bcc0add8367de2d5ebbeeb2b5404f87b4d6b667ee50b0cb93e7d"]},
+  {"jsonrpc": "2.0", "id": 0, "method": "starknet_getTransactionByBlockHashAndIndex", "params": ["0x7cca39d9c07e20e4be1747814fada13883c16e0468a3a187840151ecc126dd0", 1]},
+  {"jsonrpc": "2.0", "id": 0, "method": "starknet_getEvents", "params": [{"fromBlock": 2271, "toBlock": 2272, "page_size" :1, "page_number": 1}]},
+  {"jsonrpc": "2.0", "id": 0, "method": "starknet_getBlockTransactionCountByHash", "params": ["0x1fc32aa4362bcc0add8367de2d5ebbeeb2b5404f87b4d6b667ee50b0cb93e7d"]},
+  {"jsonrpc": "2.0", "id": 0, "method": "starknet_getTransactionByBlockHashAndIndex", "params": ["0x7cca39d9c07e20e4be1747814fada13883c16e0468a3a187840151ecc126dd0", 1]},
+  {"jsonrpc": "2.0", "id": 0, "method": "starknet_getCode", "params": ["0x03a77b563387ce5ad1a9b5572f7ee8c455a5e331aa6919b2e84c2618ec1935b5"]},
+  {"jsonrpc": "2.0", "id": 0, "method": "starknet_blockNumber"},
+  {"jsonrpc": "2.0", "id": 0, "method": "starknet_blockNumber"},
+  {"jsonrpc": "2.0", "id": 0, "method": "starknet_blockNumber"},
+  {"jsonrpc": "2.0", "id": 0, "method": "starknet_blockNumber"},
+  {"jsonrpc": "2.0", "id": 0, "method": "starknet_blockNumber"},
+  {"jsonrpc": "2.0", "id": 0, "method": "starknet_blockNumber"},
+  {"jsonrpc": "2.0", "id": 0, "method": "starknet_blockNumber"},
+  {"jsonrpc": "2.0", "id": 0, "method": "starknet_call", "params": { "request": {
+    "contract_address": "0x20cfa74ee3564b4cd5435cdace0f9c4d43b939620e4a0bb5076105df0a626c6",
+    "entry_point_selector": "0x26813D396FDB198E9EAD934E4F7A592A8B88A059E45AB0EB6EE53494E8D45B0",
+    "calldata": ["0x5"]
+    },
+    "block_hash": "latest"}
+  },
+  {"jsonrpc": "2.0", "id": 0, "method": "starknet_call", "params": { "request": {
+    "contract_address": "0x20cfa74ee3564b4cd5435cdace0f9c4d43b939620e4a0bb5076105df0a626c6",
+    "entry_point_selector": "0x26813D396FDB198E9EAD934E4F7A592A8B88A059E45AB0EB6EE53494E8D45B0",
+    "calldata": ["0x5"]
+    },
+    "block_hash": "latest"}
+  }
+]
