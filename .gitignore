@@ -81,6 +81,7 @@ typings/
 # Nuxt.js build / generate output
 .nuxt
 dist
+build
 
 # Gatsby files
 .cache/
@@ -102,3 +103,9 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Grafana Local files
+.grafana
+
+# Prometheus Local files
+.prometheus

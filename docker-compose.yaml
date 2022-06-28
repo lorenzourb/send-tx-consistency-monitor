@@ -1,0 +1,74 @@
+version: '3.6'
+services:
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    restart: unless-stopped
+    ports:
+      - 3000:3000
+    env_file:
+      - config/env.grafana
+    user: '0'
+    links:
+      - influxdb
+      - prometheus
+    healthcheck:
+      test: netstat -tunlp | grep 3000 > /dev/null; if [ 0 != $$? ]; then exit 1; else exit 0; fi;
+      interval: 5s
+      retries: 5
+      start_period: 10s
+      timeout: 3s
+    volumes:
+      - ./config/datasource.yaml:/etc/grafana/provisioning/datasources/datasource.yaml
+      - ./config/dashboards.yaml:/etc/grafana/provisioning/dashboards/dashboards.yaml
+      - ./config/grafana.ini:/etc/grafana/grafana.ini
+      - ./config/dashboards.json:/var/lib/grafana/dashboards/dashboards.json
+
+  telegraf:
+    image: telegraf:latest
+    container_name: telegraf
+    links:
+      - influxdb
+    volumes:
+      - ./config/telegraf.conf:/etc/telegraf/telegraf.conf:ro
+
+  influxdb:
+    image: influxdb:1.8
+    container_name: influxdb
+    env_file:
+      - config/env.influxdb
+    restart: unless-stopped
+    ports:
+      - 8083:8083
+      - 8086:8086
+      - 8090:8090
+      - 2003:2003
+    healthcheck:
+      test: curl -sl -I localhost:8086/ping > /dev/null; if [ 0 != $$? ]; then exit 1; else exit 0; fi;
+      interval: 5s
+      retries: 5
+      start_period: 10s
+      timeout: 3s
+    volumes:
+      - ./.grafana:/var/lib/grafana 
+    deploy:
+      resources:
+        limits:
+          cpus: "1"
+          memory: 5120M
+
+  prometheus:
+    image: prom/prometheus:v2.17.1
+    container_name: prometheus
+    volumes:
+      - ./config/prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=2h'
+      - '--web.enable-lifecycle'
+    restart: unless-stopped
+    expose:
+      - 9090

@@ -19,3 +19,21 @@ influxdb:1.8`
 K6_INFLUXDB_PUSH_INTERVAL=2s
 K6_INFLUXDB_PAYLOAD_SIZE= K6_INFLUXDB_PUSH_INTERVAL=3s INFURA_KEY='' k6 run scenarios/eth1_infura_vs_erigon.js --out influxdb=http://localhost:8086
 
+# Docker-compose
+Docker-compose can be used to provision a local stack of  `grafana`, `influxdb`,`prometheus` and `telegraf`, to ease the testing locally; You can comment off any service if not used.
+to spin off influxdb stack:
+```
+docker-compose up -d
+``` 
+
+to run the load testing: e.g. harmony
+```
+k6 run scenarios/harmony_kpi.js --out influxdb=http://localhost:8086/myk6db
+```
+
+## Endpoint
+Endpoint can be configured in the `settings.json` and pass through as `env` variables.
+to run the load testing using local endpoint:
+```
+k6 run scenarios/harmony_kpi.js -e env=local  --out influxdb=http://localhost:8086/myk6db
+```
