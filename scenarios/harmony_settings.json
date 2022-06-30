@@ -11,7 +11,7 @@
     },
     "local_100": {
         "url": "http://localhost:9500",
-        "rate": 10,
+        "rate": 100,
         "timeUnit": "1s",
         "duration": "10m",
         "preAllocatedVUs": 100,
@@ -21,30 +21,43 @@
     },
     "local_500": {
         "url": "http://localhost:9500",
-        "rate": 50,
+        "rate": 500,
         "timeUnit": "1s",
         "duration": "10m",
-        "preAllocatedVUs": 100,
-        "maxVUs": 300,
+        "preAllocatedVUs": 500,
+        "maxVUs": 900,
         "chainId": 0,
         "shardID": 0
     },
     "local_1500": {
         "url": "http://localhost:9500",
-        "rate": 150,
+        "rate": 1500,
         "timeUnit": "1s",
         "duration": "10m",
-        "preAllocatedVUs": 100,
-        "maxVUs": 300,
+        "preAllocatedVUs": 2000,
+        "maxVUs": 3000,
         "chainId": 0,
         "shardID": 0
     },
-    "testnet": {
-        "url": "https://api.s0.b.hmny.io",
+    "dev_0": {
+        "url": "http://harmony-mainnet-shard-0.dev.k8s.internal",
         "rate": 1,
-        "duration": "10s",
-        "preAllocatedVUs": 1,
-        "maxVUs": 100
+        "timeUnit": "1s",
+        "duration": "1m",
+        "preAllocatedVUs": 10,
+        "maxVUs": 20,
+        "chainId": 0,
+        "shardID": 0
+    },
+    "dev_1500": {
+        "url": "http://harmony-mainnet-shard-0.dev.k8s.internal",
+        "rate": 450,
+        "timeUnit": "1s",
+        "duration": "3m",
+        "preAllocatedVUs": 2000,
+        "maxVUs": 5000,
+        "chainId": 0,
+        "shardID": 0
     },
     "account": {
         "from": {

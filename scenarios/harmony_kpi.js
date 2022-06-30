@@ -4,7 +4,6 @@ import { group, check, sleep } from 'k6';
 import { Rate } from "k6/metrics";
 
 const setting = JSON.parse(open('../scenarios/harmony_settings.json'))[`${__ENV.env}`]
-const account = JSON.parse(open('../scenarios/harmony_settings.json')).account
 
 const url=setting.url, 
       rate=setting.rate, 
@@ -14,7 +13,7 @@ const url=setting.url,
       maxVUs=setting.maxVUs;
 
 const data = new SharedArray('Rpcs', function () {
-  return JSON.parse(open('../rpc_jsons/rpcs_harmony.json'));
+  return JSON.parse(open('../rpc_jsons/rpcs_harmony_call.json'));
 });
 
 export const options = {
