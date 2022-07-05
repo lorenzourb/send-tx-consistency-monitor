@@ -13,7 +13,7 @@ const url=setting.url,
       maxVUs=setting.maxVUs;
 
 const data = new SharedArray('Rpcs', function () {
-  return JSON.parse(open('../rpc_jsons/rpcs_harmony_no_call.json'));
+  return JSON.parse(open('../rpc_jsons/rpcs_harmony_call.json'));
 });
 
 export const options = {
