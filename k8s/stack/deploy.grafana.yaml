@@ -37,11 +37,15 @@ spec:
           - mountPath: /etc/grafana/provisioning/dashboards/dashboards.yaml
             name: grafana-config
             subPath: dashboards.yaml
-          - mountPath: /var/lib/grafana/dashboards/k6.json
-            name: grafana-config
-            subPath: k6.json
+          - mountPath: /var/lib/grafana/dashboards
+            name: dashboard-config
+
       volumes:
         - name: grafana-config
           configMap:
-              defaultMode: 420
-              name: grafana-config
+            defaultMode: 420
+            name: grafana-config
+        - name: dashboard-config
+          configMap:
+            defaultMode: 420
+            name: dashboard-config

@@ -9,19 +9,22 @@ RUN=true
 STOP=false
 TEAR=false
 INIT=false
+UPDATE=false
 
-while getopts "RSTI" option; do
+while getopts "RSTIU" option; do
   case ${option} in
   R) RUN=true ;;
   S) STOP=true ;;
   T) TEAR=true ;;
   I) INIT=true ;;
+  U) UPDATE=true ;;
   *) echo "
 K6 test
 Option:      Help:
 -R           Run test
 -S           Stop test
 -I           Init setup
+-U           Init setup
 -T           Tear down
 "
   exit 0
@@ -40,7 +43,7 @@ if [ "$STOP" == "true" ]; then
   exit 0
 fi
 
-if [ "$INIT" == "true" ]; then
+if [ "$INIT" == "true" ] || [ "$UPDATE" == "true" ] ; then
   kubectl -n $NS apply -f stack      
   kubectl -n $NS apply -f k6.worker.yaml
   exit 0
