@@ -41,11 +41,11 @@
     },
     "dev_0": {
         "url": "http://mainnet-validator-rpc-shard-0:9500",
-        "rate": 500,
+        "rate": 200,
         "timeUnit": "1s",
-        "duration": "10m",
-        "preAllocatedVUs": 500,
-        "maxVUs": 3000,
+        "duration": "1m",
+        "preAllocatedVUs": 200,
+        "maxVUs": 1000,
         "chainId": 0,
         "shardID": 0
     },

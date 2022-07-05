@@ -24,7 +24,7 @@ Option:      Help:
 -R           Run test
 -S           Stop test
 -I           Init setup
--U           Init setup
+-U           Update setup
 -T           Tear down
 "
   exit 0
