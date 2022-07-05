@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: k6-worker
+  labels:
+    app: k6-worker
+spec:
+  serviceName: k6-worker
+  replicas: 1
+  selector:
+    matchLabels:
+      app: k6-worker
+  template:
+    metadata:
+      labels:
+        app: k6-worker
+    spec:
+      containers:
+      - name: k6
+        image: loadimpact/k6:0.38.3
+        imagePullPolicy: IfNotPresent
+        command: 
+          - /bin/sh
+          - -c
+          - |
+            while true; 
+            do 
+              sleep 30;
+              echo 'I am still awake';
+            done
+        ports:
+        - containerPort: 3000
+          name: notused
+        securityContext:
+          allowPrivilegeEscalation: false
+          runAsUser: 0
+        resources:
+          limits:
+            cpu: "2500m"
+            memory: 4Gi
+          requests:
+            cpu: "500m"
+            memory: 1Gi
