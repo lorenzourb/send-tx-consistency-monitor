@@ -10,7 +10,7 @@ const url=setting.url
 const loadProfile = setting.loadProfile
 
 const data = new SharedArray('Rpcs', function () {
-  return JSON.parse(open('../rpc_jsons/rpcs_harmony_call.json'));
+  return JSON.parse(open('../rpc_jsons/rpcs_harmony_no_call.json'));
 });
 
 export const options = {
@@ -31,6 +31,7 @@ export default function () {
       timeout: '120s'
     };
     const res = http.post(url, payload, params);
+    //console.log(JSON.stringify(res.body));
     let success = check(res, {
       'is status 200': (r) => r.status === 200,
       'verify rpc resp': (r) =>

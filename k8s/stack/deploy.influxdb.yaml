@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: influxdb
+  namespace: harmony
+  labels:
+    app: influxdb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: influxdb
+  template:
+    metadata:
+      labels:
+        app: influxdb
+    spec:
+      containers:
+        - name: influxdb
+          image: influxdb:1.8
+          env:
+          - name: INFLUXDB_DATA_ENGINE
+            value: tsm1
+          - name: INFLUXDB_REPORTING_DISABLED
+            value: 'false'
+          - name: INFLUXDB_GRAPHITE_0_ENABLED
+            value: 'true'
+          - name: INFLUXDB_GRAPHITE_0_DATABASE
+            value: graphite
+          - name: INFLUXDB_GRAPHITE_0_BIND_ADDRESS
+            value: :2003
+          - name: INFLUXDB_GRAPHITE_PROTOCOL
+            value: tcp
+          - name: INFLUXDB_GRAPHITE_BATCH_SIZE
+            value: '1000'
+          ports:
+            - containerPort: 8086
+      serviceAccount: prometheus
+      serviceAccountName: prometheus
