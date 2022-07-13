@@ -2,15 +2,12 @@ import http from 'k6/http';
 import { SharedArray } from 'k6/data';
 import { group, check, sleep } from 'k6';
 import { Rate } from "k6/metrics";
+import { SCENARIOS } from './harmony_settings.js';
 
-const setting = JSON.parse(open('../scenarios/harmony_settings.json'))[`${__ENV.env}`]
+const setting = SCENARIOS.get(`${__ENV.env}`)
 
-const url=setting.url, 
-      rate=setting.rate, 
-      timeUnit=setting.timeUnit,
-      duration=setting.duration, 
-      preAllocatedVUs=setting.preAllocatedVUs, 
-      maxVUs=setting.maxVUs;
+const url=setting.url
+const loadProfile = setting.loadProfile
 
 const data = new SharedArray('Rpcs', function () {
   return JSON.parse(open('../rpc_jsons/rpcs_harmony_call.json'));
@@ -18,14 +15,7 @@ const data = new SharedArray('Rpcs', function () {
 
 export const options = {
   scenarios: {
-    contacts: {
-      executor: 'constant-arrival-rate',
-      timeUnit: timeUnit,
-      rate:rate,
-      duration: duration,
-      preAllocatedVUs: preAllocatedVUs,
-      maxVUs: maxVUs,
-    },
+    harmonyLoadTest: loadProfile
   }
 };
 
