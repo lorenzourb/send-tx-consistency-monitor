@@ -109,3 +109,6 @@ build
 
 # Prometheus Local files
 .prometheus
+
+# OS
+.DS_Store
