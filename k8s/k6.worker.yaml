@@ -20,11 +20,6 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
               - matchExpressions:
-                  - key: node.kubernetes.io/instance-type
-                    operator: In
-                    values:
-                    #  - i3.2xlarge
-                      - i3en.6xlarge
                   - key: aws.amazon.com/eks-local-ssd
                     operator: In
                     values:
@@ -37,7 +32,7 @@ spec:
 
       containers:
       - name: k6
-        image: loadimpact/k6:0.38.3
+        image: registry.gitlab.com/jasonyihk/docker/k6:prom
         imagePullPolicy: IfNotPresent
         command: 
           - /bin/sh

@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: prometheus
-  namespace: harmony
   labels:
     app: prometheus
 spec:
@@ -21,6 +20,7 @@ spec:
           args:
             - "--config.file=/etc/prometheus/prometheus.yml"
             - "--storage.tsdb.path=/prometheus/"
+            - "--web.enable-remote-write-receiver"
           ports:
             - containerPort: 9090
           volumeMounts:

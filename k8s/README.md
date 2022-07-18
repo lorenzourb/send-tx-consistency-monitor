@@ -12,6 +12,15 @@ to spin off the stack
 ./run.sh -I
 ``` 
 
+to spin off the stack in different namespace
+```
+K6_NS=mynamespace ./run.sh -I
+
+or
+
+export K6_NS=mynamespace 
+```
+
 to run test, please make change to the k6 script in  run.sh
 ```
 e.g. K6_INFLUXDB_PUSH_INTERVAL=2s k6 run scenarios/harmony_kpi.js
