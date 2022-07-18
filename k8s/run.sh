@@ -5,14 +5,14 @@ NS=${K6_NS:-harmony}
 TEST=${K6_TEST:-scenarios/harmony_kpi.js}
 POD=${K6_POD:-k6-worker-0}
 INFLUXDB=http://influxdb-service:8086/myk6db
-PROMETHEUS=http:/prometheus-service:9090/api/v1/write 
+PROMETHEUS=http://prometheus-service:9090/api/v1/write 
 
 RUN=true
 STOP=false
 TEAR=false
 INIT=false
 UPDATE=false
-FLUXDB=true
+FLUXDB=false
 
 while getopts "RSTIU" option; do
   case ${option} in
@@ -21,7 +21,7 @@ while getopts "RSTIU" option; do
   T) TEAR=true ;;
   I) INIT=true ;;
   U) UPDATE=true ;;
-  F) FLUXDB=false ;;
+  F) FLUXDB=true ;;
   *) echo "
 K6 test
 Option:      Help:
@@ -61,7 +61,7 @@ if [ "$INIT" == "true" ] || [ "$UPDATE" == "true" ] ; then
   exit 0
 fi
 
-ENV=dev_0
+ENV=k8s_s1
 
 if [ "$RUN" == "true" ]; then
   #tar -C ../ -X ../.gitignore -cpzf - . | kubectl exec -n $NS -i $POD -- tar -xpzf - .;

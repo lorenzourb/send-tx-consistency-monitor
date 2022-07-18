@@ -111,18 +111,45 @@ SCENARIOS.set('dev_1500', {
             "maxVUs": 5000
     }
     })
-const Account = {
-        "from": {
-            "privateKey": "9cd3c6817384ae3fa5189ade0e74a26a20f0464db203b68909c4ed28b5aaa4bc",
-            "password": "harmony",
-            "account": "one1c0gmg6zjpqazxy0exhn6zyvhyyf8pdnq6uj0qj",
-            "mnemonic": "draw endorse hospital furnace sibling know cushion update wine life acquire want scare street young flag panel twelve bleak tree curious salt setup that"
-        },
-        "to": {
-            "privateKey": "2f67268e1f4ac61e2b975a94ca1c61a72bfa666f8ed9bd43677b2dc23d37b8fb",
-            "password": "harmony",
-            "account": "one1d9da36glpmpn6k0wtra8ra66wfynax6d4wha59",
-            "mnemonic": "true tiny brass faith donkey blossom increase garbage require resemble eternal debris icon flat other cargo family chase volcano roast reduce deposit census vendor"
+SCENARIOS.set('k8s_s0', {
+        "url": "http://mainnet-explorer-rpc-shard-0:9500",
+        "chainId": 0,
+        "shardID": 0,
+        "loadProfile":{
+            "executor": K6Executors.constantArrivalRate,
+            "rate": 1,
+            "timeUnit": "1s",
+            "duration": "1m",
+            "preAllocatedVUs": 10,
+            "maxVUs": 20
         }
+    })
+SCENARIOS.set('k8s_s1', {
+    "url": "http://mainnet-explorer-rpc-shard-1:9500",
+    "chainId": 0,
+    "shardID": 1,
+    "loadProfile":{
+        "executor": K6Executors.constantArrivalRate,
+        "rate": 1,
+        "timeUnit": "1s",
+        "duration": "1m",
+        "preAllocatedVUs": 10,
+        "maxVUs": 20
     }
+})
+const Account = {
+    "from": {
+        "privateKey": "9cd3c6817384ae3fa5189ade0e74a26a20f0464db203b68909c4ed28b5aaa4bc",
+        "password": "harmony",
+        "account": "one1c0gmg6zjpqazxy0exhn6zyvhyyf8pdnq6uj0qj",
+        "mnemonic": "draw endorse hospital furnace sibling know cushion update wine life acquire want scare street young flag panel twelve bleak tree curious salt setup that"
+    },
+    "to": {
+        "privateKey": "2f67268e1f4ac61e2b975a94ca1c61a72bfa666f8ed9bd43677b2dc23d37b8fb",
+        "password": "harmony",
+        "account": "one1d9da36glpmpn6k0wtra8ra66wfynax6d4wha59",
+        "mnemonic": "true tiny brass faith donkey blossom increase garbage require resemble eternal debris icon flat other cargo family chase volcano roast reduce deposit census vendor"
+    }
+}
+
 export {SCENARIOS, Account}
