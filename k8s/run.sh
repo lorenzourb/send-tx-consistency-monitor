@@ -2,14 +2,17 @@
 set -e
 
 NS=${K6_NS:-harmony}
+TEST=${K6_TEST:-scenarios/harmony_kpi.js}
 POD=${K6_POD:-k6-worker-0}
 INFLUXDB=http://influxdb-service:8086/myk6db
+PROMETHEUS=http:/prometheus-service:9090/api/v1/write 
 
 RUN=true
 STOP=false
 TEAR=false
 INIT=false
 UPDATE=false
+FLUXDB=true
 
 while getopts "RSTIU" option; do
   case ${option} in
@@ -18,6 +21,7 @@ while getopts "RSTIU" option; do
   T) TEAR=true ;;
   I) INIT=true ;;
   U) UPDATE=true ;;
+  F) FLUXDB=false ;;
   *) echo "
 K6 test
 Option:      Help:
@@ -32,8 +36,13 @@ Option:      Help:
   esac
 done
 
+template=`cat rbac.prometheus.template | sed "s/{{NAMESPACE}}/$NS/g"`
+
 if [ "$TEAR" == "true" ]; then
-  kubectl -n $NS delete -f stack      
+  kubectl -n $NS delete -f stack
+
+  echo "$template" | kubectl -n $NS delete -f -
+
   kubectl -n $NS delete -f k6.worker.yaml
   exit 0
 fi
@@ -44,7 +53,10 @@ if [ "$STOP" == "true" ]; then
 fi
 
 if [ "$INIT" == "true" ] || [ "$UPDATE" == "true" ] ; then
-  kubectl -n $NS apply -f stack      
+  kubectl -n $NS apply -f stack
+
+  echo "$template" | kubectl -n $NS apply -f -
+
   kubectl -n $NS apply -f k6.worker.yaml
   exit 0
 fi
@@ -55,10 +67,19 @@ if [ "$RUN" == "true" ]; then
   #tar -C ../ -X ../.gitignore -cpzf - . | kubectl exec -n $NS -i $POD -- tar -xpzf - .;
   tar -C ../ -cpzf - . | kubectl exec -n $NS -i $POD -- tar -xpzf - .;
 
-  kubectl exec -n $NS -i $POD  -- /bin/sh -c "date && \
-        echo Starting... && \
-          K6_INFLUXDB_PUSH_INTERVAL=2s k6 run scenarios/harmony_kpi.js -e env=$ENV \
-          --out influxdb=$INFLUXDB && \
-        echo Finished..."
+  if [ "$FLUXDB" == "true" ]; then 
+    kubectl exec -n $NS -i $POD  -- /bin/sh -c "date && \
+          echo Starting... && \
+            K6_INFLUXDB_PUSH_INTERVAL=2s k6 run $TEST -e env=$ENV \
+            --out influxdb=$INFLUXDB && \
+          echo Finished..."
+  else
+    kubectl exec -n $NS -i $POD  -- /bin/sh -c "date && \
+          echo Starting... && \
+           K6_PROMETHEUS_REMOTE_URL=$PROMETHEUS k6 run $TEST -e env=$ENV \
+           -o output-prometheus-remote && \
+          echo Finished..."
+
+  fi
 fi
 
