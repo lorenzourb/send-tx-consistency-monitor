@@ -1,8 +1,8 @@
 #!/bin/sh
 set -e
 
-NS=${K6_NS:-harmony}
-TEST=${K6_TEST:-scenarios/harmony_kpi.js}
+NS=${K6_NS:-qak6}
+TEST=${K6_TEST:-scenarios/eth1_infura_vs_erigon.js}
 POD=${K6_POD:-k6-worker-0}
 INFLUXDB=http://influxdb-service:8086/myk6db
 PROMETHEUS=http://prometheus-service:9090/api/v1/write 
