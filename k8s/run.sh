@@ -70,7 +70,7 @@ if [ "$RUN" == "true" ]; then
   if [ "$FLUXDB" == "true" ]; then 
     kubectl exec -n $NS -i $POD  -- /bin/sh -c "date && \
           echo Starting... && \
-            K6_INFLUXDB_PUSH_INTERVAL=2s k6 run --out influxdb=$INFLUXDB $TEST -e env=$ENV "
+            K6_INFLUXDB_PUSH_INTERVAL=2s k6 run --out influxdb=$INFLUXDB $TEST -e env=$ENV &> /output.txt"
   else
     kubectl exec -n $NS -i $POD  -- /bin/sh -c "date && \
           echo Starting... && \
