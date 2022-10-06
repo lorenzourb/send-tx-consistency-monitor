@@ -1,8 +1,8 @@
 #!/bin/sh
 set -e
 
-NS=${K6_NS:-qak6}
-TEST=${K6_TEST:-scenarios/eth1_infura_vs_erigon.js}
+NS=${K6_NS:-qa-k6}
+TEST=${K6_TEST:-scenarios/data-consistency-monitor.js}
 POD=${K6_POD:-k6-worker-0}
 INFLUXDB=http://influxdb-service:8086/myk6db
 PROMETHEUS=http://prometheus-service:9090/api/v1/write 
@@ -12,7 +12,7 @@ STOP=false
 TEAR=false
 INIT=false
 UPDATE=false
-FLUXDB=false
+FLUXDB=true
 
 while getopts "RSTIU" option; do
   case ${option} in
@@ -70,9 +70,7 @@ if [ "$RUN" == "true" ]; then
   if [ "$FLUXDB" == "true" ]; then 
     kubectl exec -n $NS -i $POD  -- /bin/sh -c "date && \
           echo Starting... && \
-            K6_INFLUXDB_PUSH_INTERVAL=2s k6 run $TEST -e env=$ENV \
-            --out influxdb=$INFLUXDB && \
-          echo Finished..."
+            K6_INFLUXDB_PUSH_INTERVAL=2s k6 run --out influxdb=$INFLUXDB $TEST -e env=$ENV "
   else
     kubectl exec -n $NS -i $POD  -- /bin/sh -c "date && \
           echo Starting... && \
