@@ -1,7 +1,7 @@
 import http from 'k6/http';
 import { SharedArray } from 'k6/data';
 import { group, check } from 'k6';
-import { Rate } from 'k6/metrics';
+import { Rate, Gauge } from 'k6/metrics';
 
 // not using SharedArray here will mean that the code in the function call (that is what loads and
 // parses the json) will be executed per each VU which also means that there will be a complete copy
@@ -16,7 +16,7 @@ export const options = {
       executor: 'constant-arrival-rate',
       rate: 15,
       timeUnit: '1s', // 1000 iterations per second, i.e. 1000 RPS
-      duration: '24h',
+      duration: '1m',
       preAllocatedVUs: 300, // how large the initial pool of VUs would be
       maxVUs: 300, // if the preAllocatedVUs are not enough, we can initialize more
     },
@@ -37,7 +37,13 @@ export let blockNumberPokt = 0;
 export let blockNumberQuicknode = 0;
 export let blockNumberCoinbase = 0;
 
-export const payload = JSON.stringify(data[Math.floor(Math.random() * data.length)]);
+const gaugeInfura = new Gauge('Infura gauge');
+const gaugeAlchemy = new Gauge('Alchemy gauge');
+const gaugePokt = new Gauge('Pokt gauge');
+const gaugeQuicknode = new Gauge('Quicknode gauge');
+const gaugeCoinbase = new Gauge('Coinbase gauge');
+
+export const payload = JSON.stringify(data[0]);
 export const params = {
   headers: {
     'Content-Type': 'application/json',
@@ -47,7 +53,7 @@ export const params = {
 
 export default function () {
   group('Data consistency blockNumber increase - Infura', function () {
-    const url = `https://mainnet.infura.io/v3/b62f751572534b40884d6e18c291fc07`;
+    const url = `https://mainnet.infura.io/v3/06c059d611c641ffac588230c08f2e6c`;
     const res = http.post(url, payload, params);
 
     if (blockNumberInfura === 0 && res.body && JSON.parse(res.body).result) {
@@ -70,6 +76,7 @@ export default function () {
       // console.log(parseInt(JSON.parse(res.body).result, 16));
       // console.log(`dedede: ${parseInt(JSON.parse(res.body).result, 16) - blockNumberInfura}`);
       blockNumberIncreaseErrorRateInfura.add(1);
+      gaugeInfura.add(parseInt(JSON.parse(res.body).result, 16) - blockNumberInfura);
     } else {
       blockNumberInfura = parseInt(JSON.parse(res.body).result, 16);
     }
@@ -93,6 +100,7 @@ export default function () {
     });
     if (!success) {
       blockNumberIncreaseErrorRateAlchemy.add(1);
+      gaugeAlchemy.add(parseInt(JSON.parse(res.body).result, 16) - blockNumberAlchemy);
     } else {
       blockNumberAlchemy = parseInt(JSON.parse(res.body).result, 16);
     }
@@ -116,6 +124,7 @@ export default function () {
     });
     if (!success) {
       blockNumberIncreaseErrorRatePokt.add(1);
+      gaugePokt.add(parseInt(JSON.parse(res.body).result, 16) - blockNumberPokt);
     } else {
       blockNumberPokt = parseInt(JSON.parse(res.body).result, 16);
     }
@@ -139,6 +148,7 @@ export default function () {
     });
     if (!success) {
       blockNumberIncreaseErrorRateQuicknode.add(1);
+      gaugeQuicknode.add(parseInt(JSON.parse(res.body).result, 16) - blockNumberQuicknode);
     } else {
       blockNumberQuicknode = parseInt(JSON.parse(res.body).result, 16);
     }
@@ -162,6 +172,7 @@ export default function () {
     });
     if (!success) {
       blockNumberIncreaseErrorRateCoinbase.add(1);
+      gaugeCoinbase.add(parseInt(JSON.parse(res.body).result, 16) - blockNumberCoinbase);
     } else {
       blockNumberCoinbase = parseInt(JSON.parse(res.body).result, 16);
     }
