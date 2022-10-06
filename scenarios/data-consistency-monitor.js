@@ -49,7 +49,7 @@ export default function () {
       'verify rpc resp': r => r.body.includes('"jsonrpc":"2.0"'),
       'verify rpc resp - no err': r => !r.body.includes('error'),
       'block increase check': r => 
-        parseInt(JSON.parse(r.body).result, 16) >= blockNumber
+        parseInt(JSON.parse(r.body).result, 16) - blockNumber == 1  ||  parseInt(JSON.parse(r.body).result, 16) - blockNumber == 0 
     });
     if (!success) {
       // console.log(res.status === 200);
