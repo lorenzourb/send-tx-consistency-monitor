@@ -536,32 +536,45 @@ data:
           }
         ]
       },
-      "description": "A dashboard for visualizing results from the k6.io load testing tool, using the Prometheus.",
+      "description": "A dashboard for visualizing results from the k6.io load testing tool, using the InfluxDB exporter",
       "editable": true,
       "fiscalYearStartMonth": 0,
-      "gnetId": 16543,
-      "graphTooltip": 0,
+      "gnetId": 2587,
+      "graphTooltip": 2,
       "id": 3,
-      "iteration": 1658239895515,
       "links": [],
       "liveNow": false,
       "panels": [
         {
-          "datasource": "P1809F7CD0C75ACF3",
+          "collapsed": false,
+          "datasource": {
+            "type": "datasource",
+            "uid": "grafana"
+          },
           "gridPos": {
             "h": 1,
             "w": 24,
             "x": 0,
             "y": 0
           },
-          "id": 16,
-          "title": "Row title",
+          "id": 18,
+          "panels": [],
+          "targets": [
+            {
+              "datasource": {
+                "type": "datasource",
+                "uid": "grafana"
+              },
+              "refId": "A"
+            }
+          ],
+          "title": "Dashboard Row",
           "type": "row"
         },
         {
           "datasource": {
-            "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
+            "type": "influxdb",
+            "uid": "zhR29uVVz"
           },
           "fieldConfig": {
             "defaults": {
@@ -577,187 +590,175 @@ data:
                     "value": null
                   }
                 ]
-              },
-              "unit": "VUs"
+              }
             },
             "overrides": []
           },
           "gridPos": {
             "h": 6,
-            "w": 5,
+            "w": 13,
             "x": 0,
-            "y": 1
-          },
-          "id": 2,
-          "interval": "5m",
-          "options": {
-            "colorMode": "value",
-            "graphMode": "area",
-            "justifyMode": "auto",
-            "orientation": "auto",
-            "reduceOptions": {
-              "calcs": [
-                "lastNotNull"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "textMode": "auto"
-          },
-          "pluginVersion": "9.0.3",
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "P1809F7CD0C75ACF3"
-              },
-              "editorMode": "code",
-              "expr": "k6_vus",
-              "legendFormat": "Virtual Users",
-              "range": true,
-              "refId": "A"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "P1809F7CD0C75ACF3"
-              },
-              "editorMode": "code",
-              "expr": "k6_vus_max",
-              "hide": false,
-              "legendFormat": "Max Users",
-              "range": true,
-              "refId": "B"
-            }
-          ],
-          "title": "Virtual Users",
-          "type": "stat"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
-          },
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "thresholds"
-              },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": null
-                  }
-                ]
-              }
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 6,
-            "w": 4,
-            "x": 5,
-            "y": 1
-          },
-          "id": 4,
-          "interval": "5m",
-          "options": {
-            "colorMode": "value",
-            "graphMode": "area",
-            "justifyMode": "auto",
-            "orientation": "auto",
-            "reduceOptions": {
-              "calcs": [
-                "lastNotNull"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "textMode": "auto"
-          },
-          "pluginVersion": "9.0.3",
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "P1809F7CD0C75ACF3"
-              },
-              "editorMode": "code",
-              "expr": "sum(k6_http_reqs{scenario=\"$scenario\"})",
-              "interval": "",
-              "legendFormat": "sum",
-              "range": true,
-              "refId": "A"
-            }
-          ],
-          "title": "Requests",
-          "type": "stat"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
-          },
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "thresholds"
-              },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": null
-                  }
-                ]
-              }
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 6,
-            "w": 5,
-            "x": 9,
             "y": 1
           },
           "id": 30,
+          "interval": "1s",
+          "links": [],
           "options": {
             "colorMode": "value",
             "graphMode": "area",
             "justifyMode": "auto",
             "orientation": "auto",
             "reduceOptions": {
-              "calcs": [
-                "lastNotNull"
-              ],
+              "calcs": ["lastNotNull"],
               "fields": "",
               "values": false
             },
             "textMode": "auto"
           },
-          "pluginVersion": "9.0.3",
+          "pluginVersion": "9.1.7",
           "targets": [
             {
+              "alias": "Alchemy",
               "datasource": {
-                "type": "prometheus",
-                "uid": "P1809F7CD0C75ACF3"
+                "type": "influxdb",
+                "uid": "zhR29uVVz"
               },
-              "expr": "sum(rate(k6_iterations[$__rate_interval]))",
-              "refId": "A"
+              "groupBy": [],
+              "measurement": "Block Number Increase Pass Alchemy",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "A",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": ["value"],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "sum"
+                  }
+                ]
+              ],
+              "tags": []
+            },
+            {
+              "alias": "Coinbase",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "zhR29uVVz"
+              },
+              "groupBy": [],
+              "hide": false,
+              "measurement": "Block Number Increase Pass Coinbase",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "B",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": ["value"],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "sum"
+                  }
+                ]
+              ],
+              "tags": []
+            },
+            {
+              "alias": "Infura",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "zhR29uVVz"
+              },
+              "groupBy": [],
+              "hide": false,
+              "measurement": "Block Number Increase Pass Infura",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "C",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": ["value"],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "sum"
+                  }
+                ]
+              ],
+              "tags": []
+            },
+            {
+              "alias": "Pokt",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "zhR29uVVz"
+              },
+              "groupBy": [],
+              "hide": false,
+              "measurement": "Block Number Increase Pass Pokt",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "D",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": ["value"],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "sum"
+                  }
+                ]
+              ],
+              "tags": []
+            },
+            {
+              "alias": "Quicknode",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "zhR29uVVz"
+              },
+              "groupBy": [],
+              "hide": false,
+              "measurement": "Block Number Increase Pass Quicknode",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "E",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": ["value"],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "sum"
+                  }
+                ]
+              ],
+              "tags": []
             }
           ],
-          "title": "Iterations per second",
+          "title": "Consistencies",
           "type": "stat"
         },
         {
           "datasource": {
-            "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
+            "type": "influxdb",
+            "uid": "zhR29uVVz"
           },
           "fieldConfig": {
             "defaults": {
@@ -771,196 +772,186 @@ data:
                   {
                     "color": "green",
                     "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
                   }
                 ]
               }
             },
-            "overrides": [
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Received"
-                },
-                "properties": [
-                  {
-                    "id": "unit",
-                    "value": "Bps"
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Sent"
-                },
-                "properties": [
-                  {
-                    "id": "unit",
-                    "value": "Bps"
-                  }
-                ]
-              }
-            ]
+            "overrides": []
           },
           "gridPos": {
             "h": 6,
-            "w": 10,
-            "x": 14,
+            "w": 11,
+            "x": 13,
             "y": 1
           },
-          "id": 32,
+          "id": 10,
+          "interval": ">1s",
+          "links": [],
           "options": {
             "colorMode": "value",
             "graphMode": "area",
             "justifyMode": "auto",
             "orientation": "auto",
             "reduceOptions": {
-              "calcs": [
-                "lastNotNull"
-              ],
+              "calcs": ["lastNotNull"],
               "fields": "",
               "values": false
             },
             "textMode": "auto"
           },
-          "pluginVersion": "9.0.3",
+          "pluginVersion": "9.1.7",
           "targets": [
             {
+              "alias": "Alchemy",
               "datasource": {
-                "type": "prometheus",
-                "uid": "P1809F7CD0C75ACF3"
+                "type": "influxdb",
+                "uid": "zhR29uVVz"
               },
-              "editorMode": "code",
-              "expr": "sum(rate(k6_data_received[$__rate_interval]))",
-              "legendFormat": "Received",
-              "range": true,
-              "refId": "A"
+              "groupBy": [],
+              "measurement": "Alchemy gauge",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "A",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": ["value"],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "max"
+                  }
+                ]
+              ],
+              "tags": []
             },
             {
+              "alias": "Coinbase",
               "datasource": {
-                "type": "prometheus",
-                "uid": "P1809F7CD0C75ACF3"
+                "type": "influxdb",
+                "uid": "zhR29uVVz"
               },
-              "editorMode": "code",
-              "expr": "sum(rate(k6_data_sent[$__rate_interval]))",
+              "groupBy": [],
               "hide": false,
-              "legendFormat": "Sent",
-              "range": true,
-              "refId": "B"
+              "measurement": "Coinbase gauge",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "B",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": ["value"],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "max"
+                  }
+                ]
+              ],
+              "tags": []
+            },
+            {
+              "alias": "Infura",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "zhR29uVVz"
+              },
+              "groupBy": [],
+              "hide": false,
+              "measurement": "Infura gauge",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "C",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": ["value"],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "max"
+                  }
+                ]
+              ],
+              "tags": []
+            },
+            {
+              "alias": "Pokt",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "zhR29uVVz"
+              },
+              "groupBy": [],
+              "hide": false,
+              "measurement": "Pokt gauge",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "D",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": ["value"],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "max"
+                  }
+                ]
+              ],
+              "tags": []
+            },
+            {
+              "alias": "Quicknode",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "zhR29uVVz"
+              },
+              "groupBy": [],
+              "hide": false,
+              "measurement": "Quicknode gauge",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "E",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": ["value"],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "max"
+                  }
+                ]
+              ],
+              "tags": []
             }
           ],
-          "title": "Panel Title",
+          "title": "Max block lag",
           "type": "stat"
         },
         {
           "datasource": {
-            "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
-          },
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "palette-classic"
-              },
-              "custom": {
-                "axisLabel": "",
-                "axisPlacement": "auto",
-                "barAlignment": 0,
-                "drawStyle": "line",
-                "fillOpacity": 86,
-                "gradientMode": "none",
-                "hideFrom": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": false
-                },
-                "lineInterpolation": "linear",
-                "lineWidth": 2,
-                "pointSize": 5,
-                "scaleDistribution": {
-                  "type": "linear"
-                },
-                "showPoints": "never",
-                "spanNulls": false,
-                "stacking": {
-                  "group": "A",
-                  "mode": "none"
-                },
-                "thresholdsStyle": {
-                  "mode": "off"
-                }
-              },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": null
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              },
-              "unit": "short"
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 8,
-            "w": 12,
-            "x": 0,
-            "y": 7
-          },
-          "id": 38,
-          "options": {
-            "legend": {
-              "calcs": [
-                "mean",
-                "max",
-                "min"
-              ],
-              "displayMode": "table",
-              "placement": "right"
-            },
-            "tooltip": {
-              "mode": "multi",
-              "sort": "none"
-            }
-          },
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "P1809F7CD0C75ACF3"
-              },
-              "editorMode": "code",
-              "expr": "sum by (status) (k6_http_reqs{scenario=\"${scenario}\", url=~\".*${domain}.*\"})",
-              "legendFormat": "HTTP {{status}}",
-              "range": true,
-              "refId": "A"
-            }
-          ],
-          "title": "Throughput",
-          "type": "timeseries"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
+            "type": "influxdb",
+            "uid": "zhR29uVVz"
           },
           "fieldConfig": {
             "defaults": {
               "color": {
                 "mode": "thresholds"
-              },
-              "custom": {
-                "align": "center",
-                "displayMode": "auto",
-                "filterable": false,
-                "inspect": false
               },
               "mappings": [],
               "thresholds": {
@@ -976,349 +967,292 @@ data:
                   }
                 ]
               }
-            },
-            "overrides": [
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Time"
-                },
-                "properties": [
-                  {
-                    "id": "custom.hidden",
-                    "value": true
-                  }
-                ]
-              }
-            ]
-          },
-          "gridPos": {
-            "h": 8,
-            "w": 12,
-            "x": 12,
-            "y": 7
-          },
-          "id": 18,
-          "options": {
-            "footer": {
-              "enablePagination": false,
-              "fields": "",
-              "reducer": [
-                "sum"
-              ],
-              "show": false
-            },
-            "frameIndex": 0,
-            "showHeader": true,
-            "sortBy": [
-              {
-                "desc": true,
-                "displayName": "status"
-              }
-            ]
-          },
-          "pluginVersion": "9.0.3",
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "P1809F7CD0C75ACF3"
-              },
-              "editorMode": "code",
-              "exemplar": false,
-              "expr": "sum(k6_http_reqs{scenario=\"${scenario}\", url=~\".*${domain}.*\"}) by (status, method)",
-              "format": "table",
-              "instant": true,
-              "legendFormat": "{{status}}",
-              "range": false,
-              "refId": "A"
-            }
-          ],
-          "title": "Status code (${domain})",
-          "type": "table"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
-          },
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "thresholds"
-              },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": null
-                  }
-                ]
-              },
-              "unit": "ms"
             },
             "overrides": []
           },
           "gridPos": {
             "h": 5,
-            "w": 6,
+            "w": 13,
             "x": 0,
-            "y": 15
+            "y": 7
+          },
+          "id": 7,
+          "interval": "1s",
+          "links": [],
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": ["lastNotNull"],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "pluginVersion": "9.1.7",
+          "targets": [
+            {
+              "alias": "Alchemy",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "zhR29uVVz"
+              },
+              "groupBy": [],
+              "measurement": "Block Number Increase Errors Alchemy",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "A",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": ["value"],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "sum"
+                  }
+                ]
+              ],
+              "tags": []
+            },
+            {
+              "alias": "Coinbase",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "zhR29uVVz"
+              },
+              "groupBy": [],
+              "hide": false,
+              "measurement": "Block Number Increase Errors Coinbase",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "B",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": ["value"],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "sum"
+                  }
+                ]
+              ],
+              "tags": []
+            },
+            {
+              "alias": "Infura",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "zhR29uVVz"
+              },
+              "groupBy": [],
+              "hide": false,
+              "measurement": "Block Number Increase Errors Infura",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "C",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": ["value"],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "sum"
+                  }
+                ]
+              ],
+              "tags": []
+            },
+            {
+              "alias": "Pokt",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "zhR29uVVz"
+              },
+              "groupBy": [],
+              "hide": false,
+              "measurement": "Block Number Increase Errors Pokt",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "D",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": ["value"],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "sum"
+                  }
+                ]
+              ],
+              "tags": []
+            },
+            {
+              "alias": "Quicknode",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "zhR29uVVz"
+              },
+              "groupBy": [],
+              "hide": false,
+              "measurement": "Block Number Increase Errors Quicknode",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "E",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": ["value"],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "sum"
+                  }
+                ]
+              ],
+              "tags": []
+            }
+          ],
+          "title": "Inconsistencies",
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "zhR29uVVz"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 11,
+            "x": 13,
+            "y": 7
           },
           "id": 40,
+          "interval": "1s",
+          "links": [],
           "options": {
             "colorMode": "value",
             "graphMode": "area",
             "justifyMode": "auto",
             "orientation": "auto",
             "reduceOptions": {
-              "calcs": [
-                "lastNotNull"
-              ],
+              "calcs": ["lastNotNull"],
               "fields": "",
               "values": false
             },
             "textMode": "auto"
           },
-          "pluginVersion": "9.0.3",
+          "pluginVersion": "9.1.7",
           "targets": [
             {
+              "alias": "Pokt",
               "datasource": {
-                "type": "prometheus",
-                "uid": "P1809F7CD0C75ACF3"
+                "type": "influxdb",
+                "uid": "zhR29uVVz"
               },
-              "expr": "avg(k6_http_req_${HttpMetricName}_avg{scenario=\"$scenario\",expected_response=\"true\", url=~\".*${domain}.*\"})",
-              "refId": "A"
-            }
-          ],
-          "title": "Response time ${HttpMetricName} (avg)",
-          "type": "stat"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
-          },
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "thresholds"
-              },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
+              "groupBy": [],
+              "hide": false,
+              "measurement": "Non 200 Errors Pokt",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "D",
+              "resultFormat": "time_series",
+              "select": [
+                [
                   {
-                    "color": "green",
-                    "value": null
+                    "params": ["value"],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "sum"
                   }
                 ]
-              },
-              "unit": "ms"
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 5,
-            "w": 6,
-            "x": 6,
-            "y": 15
-          },
-          "id": 42,
-          "options": {
-            "colorMode": "value",
-            "graphMode": "area",
-            "justifyMode": "auto",
-            "orientation": "auto",
-            "reduceOptions": {
-              "calcs": [
-                "lastNotNull"
               ],
-              "fields": "",
-              "values": false
-            },
-            "textMode": "auto"
-          },
-          "pluginVersion": "9.0.3",
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "P1809F7CD0C75ACF3"
-              },
-              "expr": "avg(k6_http_req_${HttpMetricName}_p95{scenario=\"$scenario\",expected_response=\"true\", url=~\".*${domain}.*\"})",
-              "refId": "A"
+              "tags": []
             }
           ],
-          "title": "P95 (avg)",
-          "type": "stat"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
-          },
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "thresholds"
-              },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": null
-                  }
-                ]
-              },
-              "unit": "ms"
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 5,
-            "w": 6,
-            "x": 12,
-            "y": 15
-          },
-          "id": 44,
-          "options": {
-            "colorMode": "value",
-            "graphMode": "area",
-            "justifyMode": "auto",
-            "orientation": "auto",
-            "reduceOptions": {
-              "calcs": [
-                "lastNotNull"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "textMode": "auto"
-          },
-          "pluginVersion": "9.0.3",
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "P1809F7CD0C75ACF3"
-              },
-              "expr": "avg(k6_http_req_${HttpMetricName}_max{scenario=\"$scenario\",expected_response=\"true\", url=~\".*${domain}.*\"})",
-              "refId": "A"
-            }
-          ],
-          "title": "max (${HttpMetricName})",
-          "type": "stat"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
-          },
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "thresholds"
-              },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": null
-                  }
-                ]
-              },
-              "unit": "ms"
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 5,
-            "w": 6,
-            "x": 18,
-            "y": 15
-          },
-          "id": 46,
-          "options": {
-            "colorMode": "value",
-            "graphMode": "area",
-            "justifyMode": "auto",
-            "orientation": "auto",
-            "reduceOptions": {
-              "calcs": [
-                "lastNotNull"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "textMode": "auto"
-          },
-          "pluginVersion": "9.0.3",
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "P1809F7CD0C75ACF3"
-              },
-              "expr": "avg(k6_http_req_${HttpMetricName}_min{scenario=\"$scenario\",expected_response=\"true\", url=~\".*${domain}.*\"})",
-              "refId": "A"
-            }
-          ],
-          "title": "min (${HttpMetricName})",
+          "title": "Non 200 e",
           "type": "stat"
         },
         {
           "aliasColors": {},
-          "bars": false,
+          "bars": true,
           "dashLength": 10,
           "dashes": false,
           "datasource": {
-            "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
-          },
-          "fieldConfig": {
-            "defaults": {
-              "unit": "ms"
-            },
-            "overrides": []
+            "type": "influxdb",
+            "uid": "zhR29uVVz"
           },
           "fill": 1,
           "fillGradient": 0,
           "gridPos": {
-            "h": 10,
-            "w": 24,
+            "h": 11,
+            "w": 13,
             "x": 0,
-            "y": 20
+            "y": 12
           },
           "hiddenSeries": false,
-          "id": 28,
+          "id": 17,
+          "interval": "1s",
           "legend": {
             "alignAsTable": true,
-            "avg": false,
+            "avg": true,
             "current": false,
-            "max": false,
+            "max": true,
             "min": false,
-            "rightSide": true,
+            "rightSide": false,
             "show": true,
-            "sideWidth": 100,
             "total": false,
-            "values": false
+            "values": true
           },
-          "lines": true,
+          "lines": false,
           "linewidth": 1,
+          "links": [],
           "nullPointMode": "null",
           "options": {
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "9.0.3",
-          "pointradius": 2,
+          "pluginVersion": "9.1.7",
+          "pointradius": 5,
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
@@ -1328,31 +1262,42 @@ data:
           "targets": [
             {
               "datasource": {
-                "type": "prometheus",
-                "uid": "P1809F7CD0C75ACF3"
+                "type": "influxdb",
+                "uid": "zhR29uVVz"
               },
-              "editorMode": "code",
-              "expr": "avg(k6_http_req_${HttpMetricName}_p95{scenario=\"${scenario}\", url=~\".*${domain}.*\"}) ",
-              "legendFormat": "P95",
-              "range": true,
-              "refId": "A"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "P1809F7CD0C75ACF3"
-              },
-              "editorMode": "code",
-              "expr": "avg(k6_http_req_${HttpMetricName}_p90{scenario=\"${scenario}\", url=~\".*${domain}.*\"})",
-              "hide": false,
-              "legendFormat": "P90",
-              "range": true,
-              "refId": "B"
+              "groupBy": [
+                {
+                  "params": ["$interval"],
+                  "type": "time"
+                },
+                {
+                  "params": ["group"],
+                  "type": "tag"
+                }
+              ],
+              "measurement": "http_req_failed",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "A",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": ["value"],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "sum"
+                  }
+                ]
+              ],
+              "tags": []
             }
           ],
           "thresholds": [],
           "timeRegions": [],
-          "title": "K6 latency (${HttpMetricName})",
+          "title": "Failed requests",
           "tooltip": {
             "shared": true,
             "sort": 0,
@@ -1366,13 +1311,11 @@ data:
           },
           "yaxes": [
             {
-              "$$hashKey": "object:154",
-              "format": "ms",
+              "format": "short",
               "logBase": 1,
               "show": true
             },
             {
-              "$$hashKey": "object:155",
               "format": "short",
               "logBase": 1,
               "show": true
@@ -1383,282 +1326,1211 @@ data:
           }
         },
         {
+          "aliasColors": {},
+          "bars": true,
+          "dashLength": 10,
+          "dashes": false,
           "datasource": {
-            "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
+            "type": "influxdb",
+            "uid": "zhR29uVVz"
           },
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "thresholds"
-              },
-              "custom": {
-                "align": "auto",
-                "displayMode": "auto",
-                "inspect": false
-              },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": null
-                  },
-                  {
-                    "color": "green",
-                    "value": 200
-                  },
-                  {
-                    "color": "yellow",
-                    "value": 400
-                  },
-                  {
-                    "color": "red",
-                    "value": 500
-                  }
-                ]
-              }
-            },
-            "overrides": [
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Time"
-                },
-                "properties": [
-                  {
-                    "id": "custom.hidden",
-                    "value": true
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "status"
-                },
-                "properties": [
-                  {
-                    "id": "custom.displayMode",
-                    "value": "color-background"
-                  },
-                  {
-                    "id": "custom.align",
-                    "value": "auto"
-                  },
-                  {
-                    "id": "custom.width",
-                    "value": 60
-                  },
-                  {
-                    "id": "custom.align",
-                    "value": "auto"
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "url"
-                },
-                "properties": [
-                  {
-                    "id": "custom.width",
-                    "value": 1227
-                  },
-                  {
-                    "id": "custom.align",
-                    "value": "auto"
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Value"
-                },
-                "properties": [
-                  {
-                    "id": "custom.width"
-                  },
-                  {
-                    "id": "custom.align",
-                    "value": "center"
-                  }
-                ]
-              }
-            ]
-          },
+          "fill": 1,
+          "fillGradient": 0,
           "gridPos": {
-            "h": 12,
-            "w": 24,
-            "x": 0,
-            "y": 30
+            "h": 11,
+            "w": 11,
+            "x": 13,
+            "y": 12
           },
-          "id": 20,
+          "hiddenSeries": false,
+          "id": 1,
+          "interval": ">1s",
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": false,
+            "max": true,
+            "min": true,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": false,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
           "options": {
-            "footer": {
-              "enablePagination": false,
-              "fields": "",
-              "reducer": [
-                "sum"
-              ],
-              "show": false
-            },
-            "showHeader": true,
-            "sortBy": [
-              {
-                "desc": false,
-                "displayName": "status"
-              }
-            ]
+            "alertThreshold": true
           },
-          "pluginVersion": "9.0.3",
+          "percentage": false,
+          "pluginVersion": "9.1.7",
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
           "targets": [
             {
               "datasource": {
-                "type": "prometheus",
-                "uid": "P1809F7CD0C75ACF3"
+                "type": "influxdb",
+                "uid": "zhR29uVVz"
               },
-              "editorMode": "code",
-              "exemplar": false,
-              "expr": "sum(k6_http_reqs{scenario=\"${scenario}\", url=~\".*${domain}.*\"}) by (url, status)",
-              "format": "table",
-              "instant": true,
-              "legendFormat": "{{label_name}}",
-              "range": false,
-              "refId": "A"
+              "groupBy": [
+                {
+                  "params": ["$__interval"],
+                  "type": "time"
+                },
+                {
+                  "params": ["null"],
+                  "type": "fill"
+                }
+              ],
+              "measurement": "vus",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "A",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": ["value"],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  }
+                ]
+              ],
+              "tags": []
             }
           ],
-          "title": "Query (${domain})",
-          "transformations": [
+          "thresholds": [],
+          "timeRegions": [],
+          "title": "Virtual Users",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "mode": "time",
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
             {
-              "id": "organize",
-              "options": {
-                "excludeByName": {},
-                "indexByName": {
-                  "Time": 0,
-                  "Value": 3,
-                  "status": 2,
-                  "url": 1
+              "format": "short",
+              "logBase": 1,
+              "show": true
+            },
+            {
+              "format": "short",
+              "logBase": 1,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false
+          }
+        },
+        {
+          "collapsed": true,
+          "datasource": {
+            "type": "datasource",
+            "uid": "grafana"
+          },
+          "gridPos": {
+            "h": 1,
+            "w": 24,
+            "x": 0,
+            "y": 23
+          },
+          "id": 19,
+          "panels": [
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "_ZaONu4Vz"
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "thresholds"
+                  },
+                  "decimals": 2,
+                  "mappings": [
+                    {
+                      "options": {
+                        "match": "null",
+                        "result": {
+                          "text": "N/A"
+                        }
+                      },
+                      "type": "special"
+                    }
+                  ],
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green"
+                      },
+                      {
+                        "color": "red",
+                        "value": 80
+                      }
+                    ]
+                  },
+                  "unit": "ms"
                 },
-                "renameByName": {}
+                "overrides": []
+              },
+              "gridPos": {
+                "h": 3,
+                "w": 4,
+                "x": 0,
+                "y": 16
+              },
+              "id": 11,
+              "links": [],
+              "maxDataPoints": 100,
+              "options": {
+                "colorMode": "none",
+                "graphMode": "none",
+                "justifyMode": "auto",
+                "orientation": "horizontal",
+                "reduceOptions": {
+                  "calcs": ["mean"],
+                  "fields": "",
+                  "values": false
+                },
+                "textMode": "auto"
+              },
+              "pluginVersion": "9.1.7",
+              "targets": [
+                {
+                  "datasource": {
+                    "type": "influxdb",
+                    "uid": "_ZaONu4Vz"
+                  },
+                  "dsType": "influxdb",
+                  "groupBy": [
+                    {
+                      "params": ["$__interval"],
+                      "type": "time"
+                    },
+                    {
+                      "params": ["null"],
+                      "type": "fill"
+                    }
+                  ],
+                  "orderByTime": "ASC",
+                  "policy": "default",
+                  "query": "SELECT mean(\"value\") FROM $Measurement WHERE $timeFilter ",
+                  "rawQuery": true,
+                  "refId": "A",
+                  "resultFormat": "time_series",
+                  "select": [
+                    [
+                      {
+                        "params": ["value"],
+                        "type": "field"
+                      },
+                      {
+                        "params": [],
+                        "type": "mean"
+                      }
+                    ]
+                  ],
+                  "tags": []
+                }
+              ],
+              "title": "$Measurement (mean)",
+              "type": "stat"
+            },
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "_ZaONu4Vz"
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "thresholds"
+                  },
+                  "decimals": 2,
+                  "mappings": [
+                    {
+                      "options": {
+                        "match": "null",
+                        "result": {
+                          "text": "N/A"
+                        }
+                      },
+                      "type": "special"
+                    }
+                  ],
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green"
+                      },
+                      {
+                        "color": "red",
+                        "value": 80
+                      }
+                    ]
+                  },
+                  "unit": "ms"
+                },
+                "overrides": []
+              },
+              "gridPos": {
+                "h": 3,
+                "w": 4,
+                "x": 4,
+                "y": 16
+              },
+              "id": 14,
+              "links": [],
+              "maxDataPoints": 100,
+              "options": {
+                "colorMode": "none",
+                "graphMode": "none",
+                "justifyMode": "auto",
+                "orientation": "horizontal",
+                "reduceOptions": {
+                  "calcs": ["mean"],
+                  "fields": "",
+                  "values": false
+                },
+                "textMode": "auto"
+              },
+              "pluginVersion": "9.1.7",
+              "targets": [
+                {
+                  "datasource": {
+                    "type": "influxdb",
+                    "uid": "_ZaONu4Vz"
+                  },
+                  "dsType": "influxdb",
+                  "groupBy": [
+                    {
+                      "params": ["$__interval"],
+                      "type": "time"
+                    },
+                    {
+                      "params": ["null"],
+                      "type": "fill"
+                    }
+                  ],
+                  "orderByTime": "ASC",
+                  "policy": "default",
+                  "query": "SELECT max(\"value\") FROM $Measurement WHERE $timeFilter",
+                  "rawQuery": true,
+                  "refId": "A",
+                  "resultFormat": "time_series",
+                  "select": [
+                    [
+                      {
+                        "params": ["value"],
+                        "type": "field"
+                      },
+                      {
+                        "params": [],
+                        "type": "mean"
+                      }
+                    ]
+                  ],
+                  "tags": []
+                }
+              ],
+              "title": "$Measurement (max)",
+              "type": "stat"
+            },
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "_ZaONu4Vz"
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "thresholds"
+                  },
+                  "decimals": 2,
+                  "mappings": [
+                    {
+                      "options": {
+                        "match": "null",
+                        "result": {
+                          "text": "N/A"
+                        }
+                      },
+                      "type": "special"
+                    }
+                  ],
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green"
+                      },
+                      {
+                        "color": "red",
+                        "value": 80
+                      }
+                    ]
+                  },
+                  "unit": "ms"
+                },
+                "overrides": []
+              },
+              "gridPos": {
+                "h": 3,
+                "w": 4,
+                "x": 8,
+                "y": 16
+              },
+              "id": 15,
+              "links": [],
+              "maxDataPoints": 100,
+              "options": {
+                "colorMode": "none",
+                "graphMode": "none",
+                "justifyMode": "auto",
+                "orientation": "horizontal",
+                "reduceOptions": {
+                  "calcs": ["mean"],
+                  "fields": "",
+                  "values": false
+                },
+                "textMode": "auto"
+              },
+              "pluginVersion": "9.1.7",
+              "targets": [
+                {
+                  "datasource": {
+                    "type": "influxdb",
+                    "uid": "_ZaONu4Vz"
+                  },
+                  "dsType": "influxdb",
+                  "groupBy": [
+                    {
+                      "params": ["$__interval"],
+                      "type": "time"
+                    },
+                    {
+                      "params": ["null"],
+                      "type": "fill"
+                    }
+                  ],
+                  "orderByTime": "ASC",
+                  "policy": "default",
+                  "query": "SELECT median(\"value\") FROM $Measurement WHERE $timeFilter",
+                  "rawQuery": true,
+                  "refId": "A",
+                  "resultFormat": "time_series",
+                  "select": [
+                    [
+                      {
+                        "params": ["value"],
+                        "type": "field"
+                      },
+                      {
+                        "params": [],
+                        "type": "mean"
+                      }
+                    ]
+                  ],
+                  "tags": []
+                }
+              ],
+              "title": "$Measurement (med)",
+              "type": "stat"
+            },
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "_ZaONu4Vz"
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "thresholds"
+                  },
+                  "decimals": 2,
+                  "mappings": [
+                    {
+                      "options": {
+                        "match": "null",
+                        "result": {
+                          "text": "N/A"
+                        }
+                      },
+                      "type": "special"
+                    }
+                  ],
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green"
+                      },
+                      {
+                        "color": "red",
+                        "value": 80
+                      }
+                    ]
+                  },
+                  "unit": "ms"
+                },
+                "overrides": []
+              },
+              "gridPos": {
+                "h": 3,
+                "w": 4,
+                "x": 12,
+                "y": 16
+              },
+              "id": 16,
+              "links": [],
+              "maxDataPoints": 100,
+              "options": {
+                "colorMode": "none",
+                "graphMode": "none",
+                "justifyMode": "auto",
+                "orientation": "horizontal",
+                "reduceOptions": {
+                  "calcs": ["lastNotNull"],
+                  "fields": "",
+                  "values": false
+                },
+                "textMode": "auto"
+              },
+              "pluginVersion": "9.1.7",
+              "targets": [
+                {
+                  "datasource": {
+                    "type": "influxdb",
+                    "uid": "_ZaONu4Vz"
+                  },
+                  "dsType": "influxdb",
+                  "groupBy": [
+                    {
+                      "params": ["$__interval"],
+                      "type": "time"
+                    },
+                    {
+                      "params": ["null"],
+                      "type": "fill"
+                    }
+                  ],
+                  "orderByTime": "ASC",
+                  "policy": "default",
+                  "query": "SELECT min(\"value\") FROM $Measurement WHERE $timeFilter and value > 0",
+                  "rawQuery": true,
+                  "refId": "A",
+                  "resultFormat": "time_series",
+                  "select": [
+                    [
+                      {
+                        "params": ["value"],
+                        "type": "field"
+                      },
+                      {
+                        "params": [],
+                        "type": "mean"
+                      }
+                    ]
+                  ],
+                  "tags": []
+                }
+              ],
+              "title": "$Measurement (min)",
+              "type": "stat"
+            },
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "_ZaONu4Vz"
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "thresholds"
+                  },
+                  "decimals": 2,
+                  "mappings": [
+                    {
+                      "options": {
+                        "match": "null",
+                        "result": {
+                          "text": "N/A"
+                        }
+                      },
+                      "type": "special"
+                    }
+                  ],
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green"
+                      },
+                      {
+                        "color": "red",
+                        "value": 80
+                      }
+                    ]
+                  },
+                  "unit": "ms"
+                },
+                "overrides": []
+              },
+              "gridPos": {
+                "h": 3,
+                "w": 4,
+                "x": 16,
+                "y": 16
+              },
+              "id": 12,
+              "links": [],
+              "maxDataPoints": 100,
+              "options": {
+                "colorMode": "none",
+                "graphMode": "none",
+                "justifyMode": "auto",
+                "orientation": "horizontal",
+                "reduceOptions": {
+                  "calcs": ["mean"],
+                  "fields": "",
+                  "values": false
+                },
+                "textMode": "auto"
+              },
+              "pluginVersion": "9.1.7",
+              "targets": [
+                {
+                  "datasource": {
+                    "type": "influxdb",
+                    "uid": "_ZaONu4Vz"
+                  },
+                  "dsType": "influxdb",
+                  "groupBy": [
+                    {
+                      "params": ["$__interval"],
+                      "type": "time"
+                    },
+                    {
+                      "params": ["null"],
+                      "type": "fill"
+                    }
+                  ],
+                  "orderByTime": "ASC",
+                  "policy": "default",
+                  "query": "SELECT percentile(\"value\", 90) FROM $Measurement WHERE $timeFilter",
+                  "rawQuery": true,
+                  "refId": "A",
+                  "resultFormat": "time_series",
+                  "select": [
+                    [
+                      {
+                        "params": ["value"],
+                        "type": "field"
+                      },
+                      {
+                        "params": [],
+                        "type": "mean"
+                      }
+                    ]
+                  ],
+                  "tags": []
+                }
+              ],
+              "title": "$Measurement (p90)",
+              "type": "stat"
+            },
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "_ZaONu4Vz"
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "thresholds"
+                  },
+                  "decimals": 2,
+                  "mappings": [
+                    {
+                      "options": {
+                        "match": "null",
+                        "result": {
+                          "text": "N/A"
+                        }
+                      },
+                      "type": "special"
+                    }
+                  ],
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green"
+                      },
+                      {
+                        "color": "red",
+                        "value": 80
+                      }
+                    ]
+                  },
+                  "unit": "ms"
+                },
+                "overrides": []
+              },
+              "gridPos": {
+                "h": 3,
+                "w": 4,
+                "x": 20,
+                "y": 16
+              },
+              "id": 13,
+              "links": [],
+              "maxDataPoints": 100,
+              "options": {
+                "colorMode": "none",
+                "graphMode": "none",
+                "justifyMode": "auto",
+                "orientation": "horizontal",
+                "reduceOptions": {
+                  "calcs": ["mean"],
+                  "fields": "",
+                  "values": false
+                },
+                "textMode": "auto"
+              },
+              "pluginVersion": "9.1.7",
+              "targets": [
+                {
+                  "datasource": {
+                    "type": "influxdb",
+                    "uid": "_ZaONu4Vz"
+                  },
+                  "dsType": "influxdb",
+                  "groupBy": [
+                    {
+                      "params": ["$__interval"],
+                      "type": "time"
+                    },
+                    {
+                      "params": ["null"],
+                      "type": "fill"
+                    }
+                  ],
+                  "orderByTime": "ASC",
+                  "policy": "default",
+                  "query": "SELECT percentile(\"value\", 95) FROM $Measurement WHERE $timeFilter ",
+                  "rawQuery": true,
+                  "refId": "A",
+                  "resultFormat": "time_series",
+                  "select": [
+                    [
+                      {
+                        "params": ["value"],
+                        "type": "field"
+                      },
+                      {
+                        "params": [],
+                        "type": "mean"
+                      }
+                    ]
+                  ],
+                  "tags": []
+                }
+              ],
+              "title": "$Measurement (p95)",
+              "type": "stat"
+            },
+            {
+              "aliasColors": {},
+              "bars": false,
+              "dashLength": 10,
+              "dashes": false,
+              "datasource": {
+                "type": "influxdb",
+                "uid": "_ZaONu4Vz"
+              },
+              "description": "Grouped by 1 sec intervals",
+              "fill": 1,
+              "fillGradient": 0,
+              "gridPos": {
+                "h": 7,
+                "w": 12,
+                "x": 0,
+                "y": 19
+              },
+              "height": "250px",
+              "hiddenSeries": false,
+              "id": 5,
+              "interval": ">1s",
+              "legend": {
+                "alignAsTable": false,
+                "avg": false,
+                "current": false,
+                "max": false,
+                "min": false,
+                "show": true,
+                "total": false,
+                "values": false
+              },
+              "lines": true,
+              "linewidth": 1,
+              "links": [],
+              "nullPointMode": "null",
+              "options": {
+                "alertThreshold": true
+              },
+              "percentage": false,
+              "pluginVersion": "9.1.7",
+              "pointradius": 5,
+              "points": false,
+              "renderer": "flot",
+              "seriesOverrides": [],
+              "spaceLength": 10,
+              "stack": false,
+              "steppedLine": false,
+              "targets": [
+                {
+                  "alias": "max",
+                  "datasource": {
+                    "type": "influxdb",
+                    "uid": "_ZaONu4Vz"
+                  },
+                  "dsType": "influxdb",
+                  "groupBy": [
+                    {
+                      "params": ["$__interval"],
+                      "type": "time"
+                    },
+                    {
+                      "params": ["none"],
+                      "type": "fill"
+                    }
+                  ],
+                  "measurement": "/^$Measurement$/",
+                  "orderByTime": "ASC",
+                  "policy": "default",
+                  "query": "SELECT max(\"value\") FROM /^$Measurement$/ WHERE $timeFilter and value > 0 GROUP BY time($__interval) fill(none)",
+                  "rawQuery": true,
+                  "refId": "C",
+                  "resultFormat": "time_series",
+                  "select": [
+                    [
+                      {
+                        "params": ["value"],
+                        "type": "field"
+                      },
+                      {
+                        "params": [],
+                        "type": "max"
+                      }
+                    ]
+                  ],
+                  "tags": []
+                },
+                {
+                  "alias": "p95",
+                  "datasource": {
+                    "type": "influxdb",
+                    "uid": "_ZaONu4Vz"
+                  },
+                  "dsType": "influxdb",
+                  "groupBy": [
+                    {
+                      "params": ["$__interval"],
+                      "type": "time"
+                    },
+                    {
+                      "params": ["none"],
+                      "type": "fill"
+                    }
+                  ],
+                  "measurement": "/^$Measurement$/",
+                  "orderByTime": "ASC",
+                  "policy": "default",
+                  "query": "SELECT percentile(\"value\", 95) FROM /^$Measurement$/ WHERE $timeFilter and value > 0 GROUP BY time($__interval) fill(none)",
+                  "rawQuery": true,
+                  "refId": "D",
+                  "resultFormat": "time_series",
+                  "select": [
+                    [
+                      {
+                        "params": ["value"],
+                        "type": "field"
+                      },
+                      {
+                        "params": [95],
+                        "type": "percentile"
+                      }
+                    ]
+                  ],
+                  "tags": []
+                },
+                {
+                  "alias": "p90",
+                  "datasource": {
+                    "type": "influxdb",
+                    "uid": "_ZaONu4Vz"
+                  },
+                  "dsType": "influxdb",
+                  "groupBy": [
+                    {
+                      "params": ["$__interval"],
+                      "type": "time"
+                    },
+                    {
+                      "params": ["none"],
+                      "type": "fill"
+                    }
+                  ],
+                  "measurement": "/^$Measurement$/",
+                  "orderByTime": "ASC",
+                  "policy": "default",
+                  "query": "SELECT percentile(\"value\", 90) FROM /^$Measurement$/ WHERE $timeFilter and value > 0 GROUP BY time($__interval) fill(none)",
+                  "rawQuery": true,
+                  "refId": "A",
+                  "resultFormat": "time_series",
+                  "select": [
+                    [
+                      {
+                        "params": ["value"],
+                        "type": "field"
+                      },
+                      {
+                        "params": ["90"],
+                        "type": "percentile"
+                      }
+                    ]
+                  ],
+                  "tags": []
+                },
+                {
+                  "alias": "min",
+                  "datasource": {
+                    "type": "influxdb",
+                    "uid": "_ZaONu4Vz"
+                  },
+                  "dsType": "influxdb",
+                  "groupBy": [
+                    {
+                      "params": ["$__interval"],
+                      "type": "time"
+                    },
+                    {
+                      "params": ["none"],
+                      "type": "fill"
+                    }
+                  ],
+                  "measurement": "/^$Measurement$/",
+                  "orderByTime": "ASC",
+                  "policy": "default",
+                  "query": "SELECT min(\"value\") FROM /^$Measurement$/ WHERE $timeFilter and value > 0 GROUP BY time($__interval) fill(none)",
+                  "rawQuery": true,
+                  "refId": "E",
+                  "resultFormat": "time_series",
+                  "select": [
+                    [
+                      {
+                        "params": ["value"],
+                        "type": "field"
+                      },
+                      {
+                        "params": [],
+                        "type": "min"
+                      }
+                    ]
+                  ],
+                  "tags": []
+                }
+              ],
+              "thresholds": [],
+              "timeRegions": [],
+              "title": "$Measurement (over time)",
+              "tooltip": {
+                "shared": true,
+                "sort": 0,
+                "value_type": "individual"
+              },
+              "type": "graph",
+              "xaxis": {
+                "mode": "time",
+                "show": true,
+                "values": []
+              },
+              "yaxes": [
+                {
+                  "format": "ms",
+                  "logBase": 2,
+                  "show": true
+                },
+                {
+                  "format": "short",
+                  "logBase": 1,
+                  "show": true
+                }
+              ],
+              "yaxis": {
+                "align": false
+              }
+            },
+            {
+              "cards": {},
+              "color": {
+                "cardColor": "rgb(0, 234, 255)",
+                "colorScale": "sqrt",
+                "colorScheme": "interpolateRdYlGn",
+                "exponent": 0.5,
+                "mode": "spectrum"
+              },
+              "dataFormat": "timeseries",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "_ZaONu4Vz"
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "custom": {
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "scaleDistribution": {
+                      "type": "linear"
+                    }
+                  }
+                },
+                "overrides": []
+              },
+              "gridPos": {
+                "h": 7,
+                "w": 12,
+                "x": 12,
+                "y": 19
+              },
+              "heatmap": {},
+              "height": "250px",
+              "highlightCards": true,
+              "id": 8,
+              "interval": ">1s",
+              "links": [],
+              "options": {
+                "calculate": true,
+                "calculation": {
+                  "yBuckets": {
+                    "mode": "count",
+                    "scale": {
+                      "log": 2,
+                      "type": "log"
+                    }
+                  }
+                },
+                "cellGap": 2,
+                "cellValues": {},
+                "color": {
+                  "exponent": 0.5,
+                  "fill": "rgb(0, 234, 255)",
+                  "mode": "scheme",
+                  "reverse": false,
+                  "scale": "exponential",
+                  "scheme": "RdYlGn",
+                  "steps": 128
+                },
+                "exemplars": {
+                  "color": "rgba(255,0,255,0.7)"
+                },
+                "filterValues": {
+                  "le": 1e-9
+                },
+                "legend": {
+                  "show": false
+                },
+                "rowsFrame": {
+                  "layout": "auto"
+                },
+                "showValue": "never",
+                "tooltip": {
+                  "show": true,
+                  "yHistogram": true
+                },
+                "yAxis": {
+                  "axisPlacement": "left",
+                  "reverse": false,
+                  "unit": "ms"
+                }
+              },
+              "pluginVersion": "9.1.7",
+              "targets": [
+                {
+                  "datasource": {
+                    "type": "influxdb",
+                    "uid": "_ZaONu4Vz"
+                  },
+                  "dsType": "influxdb",
+                  "groupBy": [
+                    {
+                      "params": ["$__interval"],
+                      "type": "time"
+                    },
+                    {
+                      "params": ["null"],
+                      "type": "fill"
+                    }
+                  ],
+                  "measurement": "http_req_duration",
+                  "orderByTime": "ASC",
+                  "policy": "default",
+                  "query": "SELECT \"value\" FROM $Measurement WHERE $timeFilter and value > 0",
+                  "rawQuery": true,
+                  "refId": "A",
+                  "resultFormat": "time_series",
+                  "select": [
+                    [
+                      {
+                        "params": ["value"],
+                        "type": "field"
+                      },
+                      {
+                        "params": [],
+                        "type": "mean"
+                      }
+                    ]
+                  ],
+                  "tags": []
+                }
+              ],
+              "title": "$Measurement (over time)",
+              "tooltip": {
+                "show": true,
+                "showHistogram": true
+              },
+              "type": "heatmap",
+              "xAxis": {
+                "show": true
+              },
+              "yAxis": {
+                "format": "ms",
+                "logBase": 2,
+                "show": true
               }
             }
           ],
-          "type": "table"
+          "repeat": "Measurement",
+          "targets": [
+            {
+              "datasource": {
+                "type": "datasource",
+                "uid": "grafana"
+              },
+              "refId": "A"
+            }
+          ],
+          "title": "$Measurement",
+          "type": "row"
+        },
+        {
+          "collapsed": false,
+          "datasource": {
+            "type": "datasource",
+            "uid": "grafana"
+          },
+          "gridPos": {
+            "h": 1,
+            "w": 24,
+            "x": 0,
+            "y": 25
+          },
+          "id": 20,
+          "panels": [],
+          "targets": [
+            {
+              "datasource": {
+                "type": "datasource",
+                "uid": "grafana"
+              },
+              "refId": "A"
+            }
+          ],
+          "title": "Dashboard Row",
+          "type": "row"
         }
       ],
-      "refresh": false,
-      "schemaVersion": 36,
+      "refresh": "5s",
+      "schemaVersion": 37,
       "style": "dark",
       "tags": [],
       "templating": {
         "list": [
           {
             "current": {
-              "selected": false,
-              "text": "constant_request_rate",
-              "value": "constant_request_rate"
-            },
-            "datasource": {
-              "type": "prometheus",
-              "uid": "P1809F7CD0C75ACF3"
-            },
-            "definition": "label_values(k6_iterations, scenario)",
-            "hide": 0,
-            "includeAll": false,
-            "label": "scenario",
-            "multi": false,
-            "name": "scenario",
-            "options": [],
-            "query": {
-              "query": "label_values(k6_iterations, scenario)",
-              "refId": "StandardVariableQuery"
-            },
-            "refresh": 1,
-            "regex": "",
-            "skipUrlSync": false,
-            "sort": 0,
-            "type": "query"
-          },
-          {
-            "current": {
               "selected": true,
-              "text": "All",
-              "value": "$__all"
+              "tags": [],
+              "text": "http_req_duration + http_req_blocked",
+              "value": ["http_req_duration", "http_req_blocked"]
             },
-            "datasource": {
-              "type": "prometheus",
-              "uid": "P1809F7CD0C75ACF3"
-            },
-            "definition": "label_values(k6_http_reqs, url)",
             "hide": 0,
             "includeAll": true,
-            "label": "domain",
-            "multi": false,
-            "name": "domain",
-            "options": [],
-            "query": {
-              "query": "label_values(k6_http_reqs, url)",
-              "refId": "StandardVariableQuery"
-            },
-            "refresh": 1,
-            "regex": "/^(?:https?:\\/\\/)?(?:[^@\\/\\n]+@)?(?:www\\.)?([^:\\/?\\n]+)/",
-            "skipUrlSync": false,
-            "sort": 0,
-            "type": "query"
-          },
-          {
-            "current": {
-              "selected": true,
-              "text": "duration",
-              "value": "duration"
-            },
-            "hide": 0,
-            "includeAll": false,
-            "label": "HttpMetricName",
-            "multi": false,
-            "name": "HttpMetricName",
+            "multi": true,
+            "name": "Measurement",
             "options": [
               {
                 "selected": false,
-                "text": "blocked",
-                "value": "blocked"
-              },
-              {
-                "selected": false,
-                "text": "connecting",
-                "value": "connecting"
+                "text": "All",
+                "value": "$__all"
               },
               {
                 "selected": true,
-                "text": "duration",
-                "value": "duration"
+                "text": "http_req_duration",
+                "value": "http_req_duration"
+              },
+              {
+                "selected": true,
+                "text": "http_req_blocked",
+                "value": "http_req_blocked"
               },
               {
                 "selected": false,
-                "text": "receiving",
-                "value": "receiving"
+                "text": "http_req_connecting",
+                "value": "http_req_connecting"
               },
               {
                 "selected": false,
-                "text": "sending",
-                "value": "sending"
+                "text": "http_req_looking_up",
+                "value": "http_req_looking_up"
               },
               {
                 "selected": false,
-                "text": "tls_handshaking",
-                "value": "tls_handshaking"
+                "text": "http_req_receiving",
+                "value": "http_req_receiving"
               },
               {
                 "selected": false,
-                "text": "waiting",
-                "value": "waiting"
+                "text": "http_req_sending",
+                "value": "http_req_sending"
+              },
+              {
+                "selected": false,
+                "text": "http_req_waiting",
+                "value": "http_req_waiting"
               }
             ],
-            "query": "blocked,connecting,duration,receiving,sending,tls_handshaking,waiting",
+            "query": "http_req_duration,http_req_blocked,http_req_connecting,http_req_looking_up,http_req_receiving,http_req_sending,http_req_waiting",
             "queryValue": "",
             "skipUrlSync": false,
             "type": "custom"
@@ -1666,13 +2538,17 @@ data:
         ]
       },
       "time": {
-        "from": "now-15m",
+        "from": "2022-10-07T13:23:39.872Z",
         "to": "now"
       },
-      "timepicker": {},
-      "timezone": "",
-      "title": "k6 Load Testing Results (Prometheus)",
-      "uid": "Uiph3ioPoxasi5Zeis",
-      "version": 1,
+      "timepicker": {
+        "refresh_intervals": ["5s", "10s", "30s", "1m", "5m", "15m", "30m", "1h", "2h", "1d"],
+        "time_options": ["5m", "15m", "1h", "6h", "12h", "24h", "2d", "7d", "30d"]
+      },
+      "timezone": "browser",
+      "title": "k6 Load Testing Results",
+      "uid": "eKt5NuV4z",
+      "version": 9,
       "weekStart": ""
     }
+    
