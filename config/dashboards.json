@@ -26,7 +26,7 @@
   "fiscalYearStartMonth": 0,
   "gnetId": 2587,
   "graphTooltip": 2,
-  "id": 2,
+  "id": 4,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -357,15 +357,8 @@
             "type": "influxdb",
             "uid": "t8oSemI4k"
           },
-          "groupBy": [
-            {
-              "params": [
-                "$interval"
-              ],
-              "type": "time"
-            }
-          ],
-          "measurement": "Block Number Increase Errors Infura",
+          "groupBy": [],
+          "measurement": "Block Number Increase Errors Alchemy",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -391,16 +384,9 @@
             "type": "influxdb",
             "uid": "t8oSemI4k"
           },
-          "groupBy": [
-            {
-              "params": [
-                "$interval"
-              ],
-              "type": "time"
-            }
-          ],
+          "groupBy": [],
           "hide": false,
-          "measurement": "Block Number Increase Errors Alchemy",
+          "measurement": "Block Number Increase Errors Infura",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "B",
@@ -2130,7 +2116,7 @@
     ]
   },
   "time": {
-    "from": "2022-10-07T13:23:39.872Z",
+    "from": "now-5m",
     "to": "now"
   },
   "timepicker": {
@@ -2159,8 +2145,8 @@
     ]
   },
   "timezone": "browser",
-  "title": "k6 Load Testing Results",
-  "uid": "eKt5NuV4z",
-  "version": 1,
+  "title": "k6 Load Testing",
+  "uid": "eKt5Nuz",
+  "version": 2,
   "weekStart": ""
 }
