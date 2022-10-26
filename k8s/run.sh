@@ -58,6 +58,7 @@ if [ "$INIT" == "true" ] || [ "$UPDATE" == "true" ] ; then
   echo "$template" | kubectl -n $NS apply -f -
 
   kubectl -n $NS apply -f k6.worker.yaml
+  kubectl -n $NS apply -f k6.worker-logs.yaml
   exit 0
 fi
 

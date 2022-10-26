@@ -1,6 +1,6 @@
 import http from 'k6/http';
 import { group, check } from 'k6';
-import { Rate, Gauge } from 'k6/metrics';
+import { Counter, Gauge } from 'k6/metrics';
 
 export const options = {
   scenarios: {
@@ -18,11 +18,13 @@ export const options = {
 export let non200ErrorRateInfura = new Gauge('Non 200 Errors Infura');
 export let non200ErrorRateAlchemy = new Gauge('Non 200 Errors Alchemy');
 
-export let blockNumberIncreaseErrorRateInfura = new Rate('Block Number Increase Errors Infura');
-export let blockNumberIncreaseErrorRateAlchemy = new Rate('Block Number Increase Errors Alchemy');
+export let blockNumberIncreaseErrorRateInfura = new Counter('Block Number Increase Errors Infura');
+export let blockNumberIncreaseErrorRateAlchemy = new Counter(
+  'Block Number Increase Errors Alchemy',
+);
 
-export let blockNumberIncreasePassRateInfura = new Rate('Block Number Increase Pass Infura');
-export let blockNumberIncreasePassRateAlchemy = new Rate('Block Number Increase Pass Alchemy');
+export let blockNumberIncreasePassRateInfura = new Counter('Block Number Increase Pass Infura');
+export let blockNumberIncreasePassRateAlchemy = new Counter('Block Number Increase Pass Alchemy');
 
 export let blockNumberInfura = 0;
 export let blockNumberAlchemy = 0;
@@ -67,11 +69,30 @@ export default function () {
     if (!success) {
       if (res.status !== 200) {
         non200ErrorRateInfura.add(res.status);
-      }
-      else{
-        console.log(`Infura res.body: ${res.body} and json parsed: ${JSON.parse(res.body).result} and parsed int: ${parseInt(JSON.parse(res.body).result, 16)}`)
-        console.log(`Infura eq 1: ${parseInt(JSON.parse(res.body).result, 16) - blockNumberInfura == 1} prev block: ${blockNumberInfura}`)
-        console.log(`Infura eq 0: ${parseInt(JSON.parse(res.body).result, 16) - blockNumberInfura == 0} prev block: ${blockNumberInfura}`)
+      } else {
+        if (
+          res.body &&
+          JSON.parse(res.body).result &&
+          parseInt(JSON.parse(res.body).result, 16) > 0 &&
+          parseInt(JSON.parse(res.body).result, 16) - blockNumberInfura > 1
+        ) {
+          blockNumberInfura = parseInt(JSON.parse(res.body).result, 16);
+        }
+        console.log(
+          `Infura res.body: ${res.body} and json parsed: ${
+            JSON.parse(res.body).result
+          } and parsed int: ${parseInt(JSON.parse(res.body).result, 16)}`,
+        );
+        console.log(
+          `Infura eq 1: ${
+            parseInt(JSON.parse(res.body).result, 16) - blockNumberInfura == 1
+          } prev block: ${blockNumberInfura}`,
+        );
+        console.log(
+          `Infura eq 0: ${
+            parseInt(JSON.parse(res.body).result, 16) - blockNumberInfura == 0
+          } prev block: ${blockNumberInfura}`,
+        );
         blockNumberIncreaseErrorRateInfura.add(1);
         gaugeInfura.add(parseInt(JSON.parse(res.body).result, 16) - blockNumberInfura);
       }
@@ -103,9 +124,29 @@ export default function () {
       if (res.status !== 200) {
         non200ErrorRateAlchemy.add(res.status);
       } else {
-        console.log(`Alchemy res.body: ${res.body} and json parsed: ${JSON.parse(res.body).result} and parsed int: ${parseInt(JSON.parse(res.body).result, 16)}`)
-        console.log(`Alchemy eq 1: ${parseInt(JSON.parse(res.body).result, 16) - blockNumberAlchemy == 1} prev block: ${blockNumberAlchemy}`)
-        console.log(`Alchemy eq 0: ${parseInt(JSON.parse(res.body).result, 16) - blockNumberAlchemy == 0} prev block: ${blockNumberAlchemy}`)
+        if (
+          res.body &&
+          JSON.parse(res.body).result &&
+          parseInt(JSON.parse(res.body).result, 16) > 0 &&
+          parseInt(JSON.parse(res.body).result, 16) - blockNumberAlchemy > 1
+        ) {
+          blockNumberAlchemy = parseInt(JSON.parse(res.body).result, 16);
+        }
+        console.log(
+          `Alchemy res.body: ${res.body} and json parsed: ${
+            JSON.parse(res.body).result
+          } and parsed int: ${parseInt(JSON.parse(res.body).result, 16)}`,
+        );
+        console.log(
+          `Alchemy eq 1: ${
+            parseInt(JSON.parse(res.body).result, 16) - blockNumberAlchemy == 1
+          } prev block: ${blockNumberAlchemy}`,
+        );
+        console.log(
+          `Alchemy eq 0: ${
+            parseInt(JSON.parse(res.body).result, 16) - blockNumberAlchemy == 0
+          } prev block: ${blockNumberAlchemy}`,
+        );
         blockNumberIncreaseErrorRateAlchemy.add(1);
         gaugeAlchemy.add(parseInt(JSON.parse(res.body).result, 16) - blockNumberAlchemy);
       }
