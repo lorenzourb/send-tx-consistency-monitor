@@ -1,35 +1,35 @@
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: prometheus
-  labels:
-    app: prometheus
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: prometheus
-  template:
-    metadata:
-      labels:
-        app: prometheus
-    spec:
-      containers:
-        - name: prometheus
-          image: prom/prometheus
-          args:
-            - "--config.file=/etc/prometheus/prometheus.yml"
-            - "--storage.tsdb.path=/prometheus/"
-            - "--web.enable-remote-write-receiver"
-          ports:
-            - containerPort: 9090
-          volumeMounts:
-            - name: prometheus-config-volume
-              mountPath: /etc/prometheus/
-      serviceAccount: prometheus
-      serviceAccountName: prometheus
-      volumes:
-        - name: prometheus-config-volume
-          configMap:
-            defaultMode: 420
-            name: prometheus-server-conf
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: prometheus
+#   labels:
+#     app: prometheus
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: prometheus
+#   template:
+#     metadata:
+#       labels:
+#         app: prometheus
+#     spec:
+#       containers:
+#         - name: prometheus
+#           image: prom/prometheus
+#           args:
+#             - "--config.file=/etc/prometheus/prometheus.yml"
+#             - "--storage.tsdb.path=/prometheus/"
+#             - "--web.enable-remote-write-receiver"
+#           ports:
+#             - containerPort: 9090
+#           volumeMounts:
+#             - name: prometheus-config-volume
+#               mountPath: /etc/prometheus/
+#       serviceAccount: prometheus
+#       serviceAccountName: prometheus
+#       volumes:
+#         - name: prometheus-config-volume
+#           configMap:
+#             defaultMode: 420
+#             name: prometheus-server-conf

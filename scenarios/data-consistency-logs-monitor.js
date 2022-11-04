@@ -8,7 +8,7 @@ export const options = {
       executor: 'constant-arrival-rate',
       rate: 5,
       timeUnit: '1s', // 1000 iterations per second, i.e. 1000 RPS
-      duration: '24h',
+      duration: '3600h',
       preAllocatedVUs: 100, // how large the initial pool of VUs would be
       maxVUs: 100, // if the preAllocatedVUs are not enough, we can initialize more
     },
@@ -62,10 +62,11 @@ export default function () {
     });
     if (!success) {
       blockNumberErrorRateInfura.add(1);
-      console.log(res.status);
-      console.log(JSON.parse(res.body));
+      // console.log(res.status);
+      // console.log(JSON.parse(res.body));
+      return;
     }
-
+    
     const res2 = http.post(url, payloadLogs(JSON.parse(res.body).result), params);
     let success2 = check(res2, {
       'log call check Infura': r =>
@@ -79,9 +80,10 @@ export default function () {
 
     if (!success2) {
       logsErrorRateInfura.add(1);
-      console.log(res2.status);
-      console.log(JSON.parse(res.body).result);
-      console.log(JSON.parse(res2.body));
+      // console.log(res2.status);
+      // console.log(JSON.parse(res.body).result);
+      // console.log(JSON.parse(res2.body));
+      return;
     }
     passRateInfura.add(1);
   });
@@ -99,8 +101,9 @@ export default function () {
     });
     if (!success) {
       blockNumberErrorRateAlchemy.add(1);
-      console.log(res.status);
-      console.log(JSON.parse(res.body));
+      // console.log(res.status);
+      // console.log(JSON.parse(res.body));
+      return;
     }
 
     const res2 = http.post(url, payloadLogs(JSON.parse(res.body).result), params);
@@ -116,11 +119,13 @@ export default function () {
 
     if (!success2) {
       logsErrorRateAlchemy.add(1);
-      console.log(res2.status);
-      console.log(JSON.parse(res.body).result);
-      console.log(JSON.parse(res2.body));
+      // console.log(res2.status);
+      // console.log(JSON.parse(res.body).result);
+      // console.log(JSON.parse(res2.body));
+      return;
     }
     passRateAlchemy.add(1);
   });
 
 }
+ Save

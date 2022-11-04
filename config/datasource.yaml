@@ -7,9 +7,9 @@ datasources:
   access: proxy
   editable: true
 - name: InfluxDB
-  type: Influxdb
-  url: http://influxdb:8086 
+  type: influxdb
+  url: http://influxdb-service:8086 
   isDefault: true
   editable: true
-  access: server
+  access: proxy
   database: myk6db

@@ -24,8 +24,8 @@ spec:
             - -c
             - |
               apk add curl &&
-              curl https://gist.githubusercontent.com/lorenzourb/cbdaf76022dc984a53d56f1d794a6cd1/raw/9b6f23d94ff877821d0387c5dd5fbc20a0fde25c/data-consistency-logs-monitor.js --output test.js &&
-              export INFURA_ID="06c059d611c641ffac588230c08f2e6c" && export ALCHEMY_ID="jN1FmmT5hBDoTDJTK9fZG0B2tM0ZsR0h" &&
+              curl https://gist.githubusercontent.com/lorenzourb/cbdaf76022dc984a53d56f1d794a6cd1/raw/0bb982cbda6248da1d78c0474e07ae27ab0c3a81/data-consistency-logs-monitor.js --output test.js &&
+              export INFURA_ID="" && export ALCHEMY_ID="" &&
               K6_INFLUXDB_PUSH_INTERVAL=2s k6 run --out influxdb="http://influxdb-service:8086/myk6db" test.js -e env=prod >> ./output.txt
             # - |
             #

@@ -8,7 +8,7 @@ export const options = {
       executor: 'constant-arrival-rate',
       rate: 13,
       timeUnit: '1s', // 1000 iterations per second, i.e. 1000 RPS
-      duration: '24h',
+      duration: '3600h',
       preAllocatedVUs: 100, // how large the initial pool of VUs would be
       maxVUs: 100, // if the preAllocatedVUs are not enough, we can initialize more
     },
@@ -78,23 +78,23 @@ export default function () {
         ) {
           blockNumberInfura = parseInt(JSON.parse(res.body).result, 16);
         }
-        console.log(
-          `Infura res.body: ${res.body} and json parsed: ${
-            JSON.parse(res.body).result
-          } and parsed int: ${parseInt(JSON.parse(res.body).result, 16)}`,
-        );
-        console.log(
-          `Infura eq 1: ${
-            parseInt(JSON.parse(res.body).result, 16) - blockNumberInfura == 1
-          } prev block: ${blockNumberInfura}`,
-        );
-        console.log(
-          `Infura eq 0: ${
-            parseInt(JSON.parse(res.body).result, 16) - blockNumberInfura == 0
-          } prev block: ${blockNumberInfura}`,
-        );
+        // console.log(
+        //   `Infura res.body: ${res.body} and json parsed: ${
+        //     JSON.parse(res.body).result
+        //   } and parsed int: ${parseInt(JSON.parse(res.body).result, 16)}`,
+        // );
+        // console.log(
+        //   `Infura eq 1: ${
+        //     parseInt(JSON.parse(res.body).result, 16) - blockNumberInfura == 1
+        //   } prev block: ${blockNumberInfura}`,
+        // );
+        // console.log(
+        //   `Infura eq 0: ${
+        //     parseInt(JSON.parse(res.body).result, 16) - blockNumberInfura == 0
+        //   } prev block: ${blockNumberInfura}`,
+        // );
         blockNumberIncreaseErrorRateInfura.add(1);
-        gaugeInfura.add(parseInt(JSON.parse(res.body).result, 16) - blockNumberInfura);
+        gaugeInfura.add(Math.abs(parseInt(JSON.parse(res.body).result, 16) - blockNumberInfura));
       }
     } else {
       blockNumberInfura = parseInt(JSON.parse(res.body).result, 16);
@@ -132,23 +132,23 @@ export default function () {
         ) {
           blockNumberAlchemy = parseInt(JSON.parse(res.body).result, 16);
         }
-        console.log(
-          `Alchemy res.body: ${res.body} and json parsed: ${
-            JSON.parse(res.body).result
-          } and parsed int: ${parseInt(JSON.parse(res.body).result, 16)}`,
-        );
-        console.log(
-          `Alchemy eq 1: ${
-            parseInt(JSON.parse(res.body).result, 16) - blockNumberAlchemy == 1
-          } prev block: ${blockNumberAlchemy}`,
-        );
-        console.log(
-          `Alchemy eq 0: ${
-            parseInt(JSON.parse(res.body).result, 16) - blockNumberAlchemy == 0
-          } prev block: ${blockNumberAlchemy}`,
-        );
+        // console.log(
+        //   `Alchemy res.body: ${res.body} and json parsed: ${
+        //     JSON.parse(res.body).result
+        //   } and parsed int: ${parseInt(JSON.parse(res.body).result, 16)}`,
+        // );
+        // console.log(
+        //   `Alchemy eq 1: ${
+        //     parseInt(JSON.parse(res.body).result, 16) - blockNumberAlchemy == 1
+        //   } prev block: ${blockNumberAlchemy}`,
+        // );
+        // console.log(
+        //   `Alchemy eq 0: ${
+        //     parseInt(JSON.parse(res.body).result, 16) - blockNumberAlchemy == 0
+        //   } prev block: ${blockNumberAlchemy}`,
+        // );
         blockNumberIncreaseErrorRateAlchemy.add(1);
-        gaugeAlchemy.add(parseInt(JSON.parse(res.body).result, 16) - blockNumberAlchemy);
+        gaugeAlchemy.add(Math.abs(parseInt(JSON.parse(res.body).result, 16) - blockNumberAlchemy));
       }
     } else {
       blockNumberAlchemy = parseInt(JSON.parse(res.body).result, 16);

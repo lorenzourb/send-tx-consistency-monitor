@@ -44,11 +44,13 @@ if [ "$TEAR" == "true" ]; then
   echo "$template" | kubectl -n $NS delete -f -
 
   kubectl -n $NS delete -f k6.worker.yaml
+  kubectl -n $NS delete -f k6.worker-logs.yaml
   exit 0
 fi
 
 if [ "$STOP" == "true" ]; then
   kubectl -n $NS delete -f k6.worker.yaml
+  kubectl -n $NS delete -f k6.worker-logs.yaml
   exit 0
 fi
 

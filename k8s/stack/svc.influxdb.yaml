@@ -5,7 +5,10 @@ metadata:
   annotations:
       prometheus.io/scrape: 'true'
       prometheus.io/port:   '9090'
-
+      service.beta.kubernetes.io/aws-load-balancer-type: external
+      service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: ip
+      service.beta.kubernetes.io/aws-load-balancer-scheme: internal
+      external-dns.alpha.kubernetes.io/hostname: qa-influxdb-dev.infuratest.io
 spec:
   selector:
     app: influxdb
@@ -13,3 +16,6 @@ spec:
   ports:
     - port: 8086
       targetPort: 8086
+  type: LoadBalancer
+  selector:
+    app: influxdb
