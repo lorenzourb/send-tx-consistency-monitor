@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: k6-worker-logs
+  name: data-consistency-call-monitor
   labels:
-    app: k6-worker-logs
+    app: data-consistency-call-monitor
 spec:
-  serviceName: k6-worker-logs
+  serviceName: data-consistency-call-monitor
   replicas: 1
   selector:
     matchLabels:
-      app: k6-worker-logs
+      app: data-consistency-call-monitor
   template:
     metadata:
       labels:
-        app: k6-worker-logs
+        app: data-consistency-call-monitor
     spec:
       containers:
         - name: k6
@@ -24,8 +24,8 @@ spec:
             - -c
             - |
               apk add curl &&
-              curl https://gist.githubusercontent.com/lorenzourb/cbdaf76022dc984a53d56f1d794a6cd1/raw/0bb982cbda6248da1d78c0474e07ae27ab0c3a81/data-consistency-logs-monitor.js --output test.js &&
-              export INFURA_ID="" && export ALCHEMY_ID="" &&
+              curl https://gist.githubusercontent.com/lorenzourb/651f09c4e291faa3f41a84c6fd7be6e5/raw/dc3f2f4e53aa0662d4c4cf52dff5f39e9ca4a759/data-consistency-call-monitor.js --output test.js &&
+              export INFURA_ID="" && export ALCHEMY_ID=""  &&
               K6_INFLUXDB_PUSH_INTERVAL=2s k6 run --out influxdb="http://influxdb-service:8086/myk6db" test.js -e env=prod >> ./output.txt
             # - |
             #
@@ -37,8 +37,8 @@ spec:
             runAsUser: 0
           resources:
             limits:
-              cpu: '4'
+              cpu: '2'
               memory: 16Gi
             requests:
               cpu: '1'
-              memory: 1Gi
+              memory: 16Gi

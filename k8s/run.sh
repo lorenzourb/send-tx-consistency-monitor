@@ -43,14 +43,16 @@ if [ "$TEAR" == "true" ]; then
 
   echo "$template" | kubectl -n $NS delete -f -
 
-  kubectl -n $NS delete -f k6.worker.yaml
-  kubectl -n $NS delete -f k6.worker-logs.yaml
+  kubectl -n $NS delete -f data-consistency-block-number-monitor.yaml
+  kubectl -n $NS delete -f data-consistency-get-block-by-number-monitor.yaml
+  kubectl -n $NS delete -f data-consistency-logs-monitor.yaml
   exit 0
 fi
 
 if [ "$STOP" == "true" ]; then
-  kubectl -n $NS delete -f k6.worker.yaml
-  kubectl -n $NS delete -f k6.worker-logs.yaml
+  kubectl -n $NS delete -f data-consistency-block-number-monitor.yaml
+  kubectl -n $NS delete -f data-consistency-get-block-by-number-monitor.yaml
+  kubectl -n $NS delete -f data-consistency-logs-monitor.yaml
   exit 0
 fi
 
@@ -59,8 +61,9 @@ if [ "$INIT" == "true" ] || [ "$UPDATE" == "true" ] ; then
 
   echo "$template" | kubectl -n $NS apply -f -
 
-  kubectl -n $NS apply -f k6.worker.yaml
-  kubectl -n $NS apply -f k6.worker-logs.yaml
+  kubectl -n $NS apply -f data-consistency-block-number-monitor.yaml
+  kubectl -n $NS apply -f data-consistency-get-block-by-number-monitor.yaml
+  kubectl -n $NS apply -f data-consistency-logs-monitor.yaml
   exit 0
 fi
 

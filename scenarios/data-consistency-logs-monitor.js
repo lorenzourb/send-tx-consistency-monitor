@@ -1,6 +1,6 @@
 import http from 'k6/http';
 import { group, check } from 'k6';
-import { Counter, Gauge } from 'k6/metrics';
+import { Counter } from 'k6/metrics';
 
 export const options = {
   scenarios: {
@@ -128,4 +128,3 @@ export default function () {
   });
 
 }
- Save

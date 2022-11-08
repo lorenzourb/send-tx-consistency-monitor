@@ -11,7 +11,7 @@
     "near_prod_like_read": "k6 run scenarios/near_prod_like_read_only.js",
     "near_prod_like": "k6 run scenarios/near_prod_like_write.js & k6 run scenarios/near_prod_like_read_only.js",
     "soak": "k6 run scenarios/soak_test_qa_124.js",
-    "comp_comparison": "INFURA_KEY=$INFURA_KEY ALCHEMY_KEY=$ALCHEMY_KEY k6 run scenarios/infura_vs_alchemy.js",
+    "comp_comparison": "INFURA_ID=\"\" ALCHEMY_ID=\"\" k6 run scenarios/data-consistency-get-block-by-number-monitor.js",
     "erigon_comparison": "K6_INFLUXDB_PAYLOAD_SIZE=5000000 K6_INFLUXDB_PUSH_INTERVAL=2s k6 run scenarios/eth1_infura_vs_erigon.js --out influxdb=http://localhost:8086"
   },
   "author": "",
