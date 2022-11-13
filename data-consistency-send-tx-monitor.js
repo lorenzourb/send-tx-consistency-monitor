@@ -7,7 +7,7 @@ import Common from './common/index.js';
 export const options = {
   vus: 1,
   // duration: '10m',
-  iterations: 1,
+  iterations: 6,
 };
 
 const fromAddress = '0x3bE0Ec232d2D9B3912dE6f1ff941CB499db4eCe7';
@@ -113,7 +113,7 @@ export default function () {
     }
 
     let mined = false;
-    let maxCount = 120;
+    let maxCount = 10;
     while (!mined && maxCount !== 0) {
       let res = http.post(
         url,
@@ -198,7 +198,7 @@ export default function () {
     }
 
     let mined = false;
-    let maxCount = 120;
+    let maxCount = 10;
     while (!mined && maxCount !== 0) {
       let res = http.post(
         url,
