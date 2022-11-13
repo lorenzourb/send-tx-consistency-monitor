@@ -2,7 +2,7 @@ import http from 'k6/http';
 import { group, sleep } from 'k6';
 import { Counter } from 'k6/metrics';
 import ethereumjs from 'https://cdn.jsdelivr.net/gh/ethereumjs/browser-builds/dist/ethereumjs-tx/ethereumjs-tx-1.3.3.min.js';
-import Common from './index.js';
+import Common from './common/index.js';
 
 export const options = {
   vus: 1,
