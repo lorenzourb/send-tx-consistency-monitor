@@ -1,9 +1,0 @@
-[
-
-  {"jsonrpc":"2.0","id":1,"method":"hmyv2_call","params":[{"to": "0x5575821Ebf7427ed81907a373cF7de7Dd4403C99"},0]},
-  {"jsonrpc":"2.0","id":1,"method":"hmyv2_call","params":[{"to": "0x5575821Ebf7427ed81907a373cF7de7Dd4403C99"},0]},
-  {"jsonrpc":"2.0","id":1,"method":"hmyv2_call","params":[{"to": "0x5575821Ebf7427ed81907a373cF7de7Dd4403C99"},0]},
-  {"jsonrpc":"2.0","id":1,"method":"hmyv2_call","params":[{"to": "0x5575821Ebf7427ed81907a373cF7de7Dd4403C99"},0]},
-  {"jsonrpc":"2.0","id":1,"method":"hmyv2_call","params":[{"to": "0x5575821Ebf7427ed81907a373cF7de7Dd4403C99"},0]},
-  {"jsonrpc":"2.0","id":1,"method":"hmyv2_call","params":[{"to": "0x5575821Ebf7427ed81907a373cF7de7Dd4403C99"},0]}
-]
