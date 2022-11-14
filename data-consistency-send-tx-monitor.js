@@ -80,7 +80,7 @@ export default function () {
       data:
         '0xa9059cbb00000000000000000000000035ffF9272293a0E3c4A847b0842B8ec75c541BDf0000000000000000000000000000000000000000000000000000000000000001',
       to: '0xb5f27A4278c1EECef9DFC3F4Cee5A05b2F8117db',
-      value: '0x0',
+      value: `0x${getRandomIntInRange(1, 1000)}`,
       gasLimit: 200000,
       gasPrice: 2000,
     };
@@ -164,7 +164,7 @@ export default function () {
       data:
         '0xa9059cbb00000000000000000000000035ffF9272293a0E3c4A847b0842B8ec75c541BDf0000000000000000000000000000000000000000000000000000000000000001',
       to: '0xb5f27A4278c1EECef9DFC3F4Cee5A05b2F8117db',
-      value: '0x0',
+      value: `0x${getRandomIntInRange(1, 1000)}`,
       gasLimit: 200000,
       gasPrice: 2000,
     };
