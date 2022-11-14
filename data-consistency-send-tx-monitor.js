@@ -113,7 +113,7 @@ export default function () {
     }
 
     let mined = false;
-    let maxCount = 120;
+    let maxCount = 200;
     while (!mined && maxCount !== 0) {
       let res = http.post(
         url,
@@ -198,7 +198,7 @@ export default function () {
     }
 
     let mined = false;
-    let maxCount = 120;
+    let maxCount = 200;
     while (!mined && maxCount !== 0) {
       let res = http.post(
         url,
