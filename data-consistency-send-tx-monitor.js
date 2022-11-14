@@ -4,6 +4,12 @@ import { Counter } from 'k6/metrics';
 import ethereumjs from 'https://cdn.jsdelivr.net/gh/ethereumjs/browser-builds/dist/ethereumjs-tx/ethereumjs-tx-1.3.3.min.js';
 import Common from './common/index.js';
 
+export const getRandomIntInRange = (min, max) => {
+  const ceilMin = Math.ceil(min)
+  const floorMax = Math.floor(max)
+  return Math.floor(Math.random() * (floorMax - ceilMin) + ceilMin)
+}
+
 export const options = {
   vus: 1,
   duration: '3000h',
