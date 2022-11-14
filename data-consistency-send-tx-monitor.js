@@ -21,7 +21,6 @@ const secretPrivateKey = __ENV.ACCOUNT_PRIVATE_KEY;
 
 export let totRunsInfura = new Counter('totRuns Infura');
 export let totRunsAlchemy = new Counter('totRuns Alchemy');
-
 export let getGasPriceErrorInfura = new Counter('getGasPrice Infura');
 export let getGasPriceErrorAlchemy = new Counter('getGasPrice Alchemy');
 export let getTxCount1ErrorInfura = new Counter('getTxCount1Error Infura');
@@ -80,8 +79,6 @@ export const params = {
   timeout: '60s',
 };
 
-let prevGasPrice = 0;
-
 export default function () {
   group('Data consistency GetBlockByNumber - Infura', function () {
     const url = `https://goerli.infura.io/v3/${__ENV.INFURA_ID}`;
@@ -89,7 +86,6 @@ export default function () {
     const res = http.post(url, payloadGetTransactionCount(fromAddress, 'latest'), params);
     const res2 = http.post(url, payloadGasPrice(), params);
     const gasPrice = JSON.parse(res2.body).result;
-    prevGasPrice = parseInt(gasPrice, 16);
     // console.log(gasPrice);
     const initialNonce = parseInt(JSON.parse(res.body).result, 16);
     if (!gasPrice) {
@@ -110,7 +106,7 @@ export default function () {
       to: '0xb5f27A4278c1EECef9DFC3F4Cee5A05b2F8117db',
       value: `0x0`,
       gasLimit: 200000,
-      gasPrice: prevGasPrice,
+      gasPrice: parseInt(gasPrice, 16),
     };
 
     var common = Common.forCustomChain(
@@ -181,7 +177,6 @@ export default function () {
     const res = http.post(url, payloadGetTransactionCount(fromAddress, 'latest'), params);
     const res2 = http.post(url, payloadGasPrice(), params);
     const gasPrice = JSON.parse(res2.body).result;
-    prevGasPrice = parseInt(gasPrice, 16);
     if (!gasPrice) {
       getGasPriceErrorAlchemy.add(1);
       return;
@@ -202,7 +197,7 @@ export default function () {
       to: '0xb5f27A4278c1EECef9DFC3F4Cee5A05b2F8117db',
       value: `0x0`,
       gasLimit: 200000,
-      gasPrice: prevGasPrice,
+      gasPrice: parseInt(gasPrice, 16),
     };
 
     var common = Common.forCustomChain(
