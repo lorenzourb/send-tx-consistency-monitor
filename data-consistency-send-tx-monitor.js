@@ -48,11 +48,11 @@ export const payloadRelaySendTransaction = signature =>
     params: [signature],
     method: 'eth_sendRawTransaction',
   });
-export const payloadGetTransactionCount = (address, state) =>
+export const payloadGetTransactionCount = (address, block) =>
   JSON.stringify({
     id: 1,
     jsonrpc: '2.0',
-    params: [address, state],
+    params: [address, block],
     method: 'eth_getTransactionCount',
   });
 export const payloadGasPrice = () =>
