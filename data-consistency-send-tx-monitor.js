@@ -105,8 +105,8 @@ export default function () {
       params,
     );
 
-    console.log(JSON.parse(sendTxReponse.body));
-    console.log(JSON.parse(sendTxReponse.body).result);
+//     console.log(JSON.parse(sendTxReponse.body));
+//     console.log(JSON.parse(sendTxReponse.body).result);
     if (!JSON.parse(sendTxReponse.body).result) {
       sendTxErrorInfura.add(1);
       return;
@@ -122,11 +122,12 @@ export default function () {
       );
       if (JSON.parse(res.body).blockNumber) {
         mined = true;
-      } else {
-        console.log('not mined retrying');
-      }
-      sleep(2);
-      maxCount--;
+      } 
+      else {
+//         console.log('not mined retrying');
+        sleep(2);
+        maxCount--;
+      }  
     }
 
     const response3 = http.post(url, payloadGetTransactionCount(fromAddress), params);
@@ -190,7 +191,7 @@ export default function () {
     );
 
     console.log(JSON.parse(sendTxReponse.body));
-    console.log(JSON.parse(sendTxReponse.body).result);
+//     console.log(JSON.parse(sendTxReponse.body).result);
 
     if (!JSON.parse(sendTxReponse.body).result) {
       sendTxErrorAlchemy.add(1);
@@ -208,10 +209,10 @@ export default function () {
       if (JSON.parse(res.body).blockNumber) {
         mined = true;
       } else {
-        console.log('not mined retrying');
-      }
-      sleep(2);
-      maxCount--;
+//         console.log('not mined retrying');
+        sleep(2);
+        maxCount--;
+      }  
     }
 
     const response3 = http.post(url, payloadGetTransactionCount(fromAddress), params);
