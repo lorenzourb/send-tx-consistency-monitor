@@ -19,6 +19,9 @@ export const getRandomIntInRange = (min, max) => {
 const fromAddress = '0x3bE0Ec232d2D9B3912dE6f1ff941CB499db4eCe7';
 const secretPrivateKey = __ENV.ACCOUNT_PRIVATE_KEY;
 
+export let totRunsInfura = new Counter('totRuns Infura');
+export let totRunsAlchemy = new Counter('totRuns Alchemy');
+
 export let getGasPriceErrorInfura = new Counter('getGasPrice Infura');
 export let getGasPriceErrorAlchemy = new Counter('getGasPrice Alchemy');
 export let getTxCount1ErrorInfura = new Counter('getTxCount1Error Infura');
@@ -137,6 +140,7 @@ export default function () {
       return;
     }
 
+    totRunsInfura.add(1)
     let mined = false;
     let maxCount = 200;
     while (!mined && maxCount !== 0) {
@@ -228,6 +232,7 @@ export default function () {
       return;
     }
 
+    totRunsAlchemy.add(1)
     let mined = false;
     let maxCount = 200;
     while (!mined && maxCount !== 0) {
